@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import LoginForm from "./components/LoginForm";
 
 export const Login = () => {
+  const router = useRouter();
   return (
     <div className="flex inset-0 absolute">
       <div className="flex flex-1 bg-black" />
