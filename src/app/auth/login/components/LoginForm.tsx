@@ -1,35 +1,33 @@
 "use client";
 import Button from "@/components/Button";
-import { AuthContext } from "@/contexts/AuthContext";
+import { useAuth } from "@/app/context/authContext";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
-  // ! Hooks para el form
-  const router = useRouter(); // NOTE: Para redirigir paginas
+  const router = useRouter();
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm(); // NOTE: Para hacer validaciones en el formulario
+  } = useForm();
 
-  const { auth, setAuth } = useContext(AuthContext);
+  const { isLogged, login } = useAuth();
 
   const [incorrect, setIncorrect] = useState(false);
 
-  // ! Función para verificar los datos
   const checkUser = (data: any) => {
     if (
       data.email === "panque.sito@hotcake.com" &&
       data.password === "ChantilinConHelado"
     ) {
-      router.push("pages/employees");
-      setAuth({ isLogged: true });
+      router.push("/dashboard/employees");
+      login();
     } else {
       setIncorrect(true);
     }
-    console.log(auth);
+    console.log(isLogged);
   };
 
   return (
