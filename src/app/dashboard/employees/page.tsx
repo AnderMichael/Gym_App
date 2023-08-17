@@ -1,26 +1,29 @@
 "use client";
 
-import React from 'react'
-import { EyeIcon, TrashIcon } from '@heroicons/react/solid';
+import React from 'react';
+import useAxios from 'axios-hooks';
+import { EyeIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/solid';
+import { useRouter } from 'next/navigation';
 
 const EmployeePage = () => {
-    const employeesData = [
-        {
-            fullName: 'Juan Pérez',
-            position: 'Desarrollador',
-            contactNumber: '123-456-7890'
-        },
-        {
-            fullName: 'María Rodríguez',
-            position: 'Diseñadora',
-            contactNumber: '098-765-4321'
-        },
-        // ... puedes agregar más datos de ejemplo aquí
-    ];
+    const [{ data: employeesData, loading, error }] = useAxios('http://localhost:3000/employee');
+    const router = useRouter()
+
+    const handleAddEmployee = () => {
+        router.push('/dashboard/employees/add_employee');
+    }
+
+    if (loading) return <p>Cargando...</p>;
+    if (error) return <p>Error al cargar los datos.</p>;
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-white text-2xl font-bold mb-4">Employees</h1>
+            <div className="flex items-center justify-between mb-4">
+                <h1 className="text-white text-2xl font-bold">Employees</h1>
+                <button onClick={handleAddEmployee}>
+                    <PlusCircleIcon className="h-6 w-6 text-blue-500 hover:text-blue-700" />
+                </button>
+            </div>
             <table className="w-full table-auto">
                 <thead>
                     <tr>
@@ -30,11 +33,11 @@ const EmployeePage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {employeesData.map((employee, index) => (
-                        <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                            <td className="border px-4 py-2">{employee.fullName}</td>
-                            <td className="border px-4 py-2">{employee.position}</td>
-                            <td className="border px-4 py-2">{employee.contactNumber}</td>
+                    {employeesData.map((employee) => (
+                        <tr key={employee.id} className={employee.id % 2 === 0 ? 'bg-gray-100' : ''}>
+                            <td className="border px-4 py-2">{employee.employeename}</td>
+                            <td className="border px-4 py-2">{employee.cargo}</td>
+                            <td className="border px-4 py-2">{employee.numero}</td>
                             <td className="border px-4 py-2">
                                 <button onClick={() => handleView(employee)}>
                                     <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
@@ -53,4 +56,4 @@ const EmployeePage = () => {
     );
 }
 
-export default EmployeePage
+export default EmployeePage;
