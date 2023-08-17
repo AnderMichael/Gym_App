@@ -13,7 +13,7 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
     const [{ data: employeeData, loading, error }] = useAxios(`http://localhost:3000/employee/${employeeId}`);
 
     const closeView = () => {
-        router.push('/employees');
+        router.push('/dashboard/employees');
     };
 
     if (loading) return <p>Cargando...</p>;

@@ -3,7 +3,7 @@ import Button from "@/components/Button";
 import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-
+import { useState } from "react";
 const EmployeeForm = () => {
   // ! Hooks para el form
   const router = useRouter(); // NOTE: Para redirigir paginas
@@ -13,31 +13,42 @@ const EmployeeForm = () => {
     handleSubmit,
   } = useForm(); // NOTE: Para hacer validaciones en el formulario
 
-
   const [, executePost] = useAxios(
     {
-      url: 'http://localhost:3000/employee',
-      method: 'POST'
+      url: "http://localhost:3000/employee",
+      method: "POST",
     },
     { manual: true }
   );
 
-  const onSubmitForm = async (data) => {
-    try {
-      await executePost({
-        data: {
-          employeename: data.name,
-          cargo: data.charge,
-          numero: data.CI
-        }
-      });
-      router.back();
-      window.location.reload();
-    } catch (error) {
-      console.error("Hubo un error al enviar los datos:", error);
+  const onSubmitForm = async (data: any) => {
+    if (isCancel) {
+      try {
+        await executePost({
+          data: {
+            employeename: data.name,
+            cargo: data.charge,
+            numero: data.CI,
+          },
+        });
+        router.back();
+        window.location.reload();
+      } catch (error) {
+        console.error("Hubo un error al enviar los datos:", error);
+      }
     }
   };
 
+  const [isCancel, setIsCancel] = useState(true);
+
+  const registration = () => {
+    setIsCancel(true);
+  };
+
+  const cancellation = () => {
+    setIsCancel(false);
+    router.back();
+  };
 
   return (
     <div className="flex bg-[#DC6000] p-10 rounded-md">
@@ -97,7 +108,14 @@ const EmployeeForm = () => {
             </p>
           )}
         </div>
-        <Button title="Close" />
+        <div className="flex">
+          <div className="flex-1 p-0.5">
+            <Button title="Register" onClick={registration} />
+          </div>
+          <div className="flex-1 p-0.5">
+            <Button title="Cancel" onClick={cancellation} />
+          </div>
+        </div>
       </form>
     </div>
   );
