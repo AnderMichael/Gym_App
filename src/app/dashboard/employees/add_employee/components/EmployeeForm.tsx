@@ -32,6 +32,7 @@ const EmployeeForm = () => {
         }
       });
       router.back();
+      window.location.reload();
     } catch (error) {
       console.error("Hubo un error al enviar los datos:", error);
     }
