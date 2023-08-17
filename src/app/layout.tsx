@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { AuthProvider } from '../app/context/authContext';
+import { Lemon } from "next/font/google";
+import { AuthProvider } from "../app/context/authContext";
 
-const inter = Inter({ subsets: ["latin"] });
+const lemon = Lemon({ subsets: ["latin"], weight: "400", display: "swap" });
 
 export const metadata: Metadata = {
   title: "GYM APP",
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={lemon.className}>{children}</body>
       </html>
     </AuthProvider>
   );
