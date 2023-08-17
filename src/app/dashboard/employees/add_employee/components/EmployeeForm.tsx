@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/Button";
+import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -13,17 +14,35 @@ const EmployeeForm = () => {
   } = useForm(); // NOTE: Para hacer validaciones en el formulario
 
 
-  // ! Función para verificar los datos
-  const addRegister = (data: any) => {
-    let emp = { id: data.CI, name: data.name, position: data.charge };
-    router.back();
+  const [, executePost] = useAxios(
+    {
+      url: 'http://localhost:3000/employee',
+      method: 'POST'
+    },
+    { manual: true }
+  );
+
+  const onSubmitForm = async (data) => {
+    try {
+      await executePost({
+        data: {
+          employeename: data.name,
+          cargo: data.charge,
+          numero: data.CI
+        }
+      });
+      router.back();
+    } catch (error) {
+      console.error("Hubo un error al enviar los datos:", error);
+    }
   };
+
 
   return (
     <div className="flex bg-[#DC6000] p-10 rounded-md">
       <form
         className="flex flex-col space-y-4 md:space-y-6 w-[300px]"
-        onSubmit={handleSubmit(addRegister)}
+        onSubmit={handleSubmit(onSubmitForm)}
       >
         <div className="flex flex-col">
           <div className="mb-2 block">
