@@ -1,6 +1,5 @@
 "use client";
 import Button from "@/components/Button";
-import { Employee, useEmployeeContext } from "@/contexts/RegisterContext";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -13,14 +12,10 @@ const EmployeeForm = () => {
     handleSubmit,
   } = useForm(); // NOTE: Para hacer validaciones en el formulario
 
-  const { employees, dispatch } = useEmployeeContext();
 
   // ! Función para verificar los datos
   const addRegister = (data: any) => {
-    let emp: Employee = { id: data.CI, name: data.name, position: data.charge };
-    console.log(employees);
-    dispatch({ type: "ADD_EMPLOYEE", payload: emp });
-    console.log(employees);
+    let emp = { id: data.CI, name: data.name, position: data.charge };
     router.back();
   };
 
