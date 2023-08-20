@@ -7,12 +7,10 @@ interface buttonApp {
 }
 
 const Button = (props: buttonApp) => {
-  const buttonProps = `bg-[${
-    props.color === null ? props.color : "#15133B"
-  }] p-2 text-white rounded-xl`;
+  const buttonProps = `flex-1 bg-[${props.color ? props.color : "#15133B"}] p-2 text-white rounded-xl`;
   return (
     <button className={buttonProps} onClick={props.onClick}>
-      <h1>{props.title}</h1>
+      <h1 className="font-semibold">{props.title}</h1>
     </button>
   );
 };

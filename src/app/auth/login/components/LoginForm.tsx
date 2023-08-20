@@ -42,7 +42,7 @@ const LoginForm = () => {
           </div>
           <input
             className="flex-1 bg-white text-gray-800 rounded-lg"
-            placeholder="name@email.com"
+            placeholder="usuario@email.com"
             type="text"
             {...register("email", {
               required: true,
@@ -50,15 +50,15 @@ const LoginForm = () => {
             })}
           />
           {errors.email?.type === "required" && (
-            <p className="text-red-700 mt-3">* You need to type an Email</p>
+            <p className="text-red-700 mt-3">* Debes introducir un email</p>
           )}
           {errors.email?.type === "pattern" && (
-            <p className="text-red-700 mt-3">* Type a valid Email</p>
+            <p className="text-red-700 mt-3">* Introduce un email válido</p>
           )}
         </div>
         <div className="flex flex-1 flex-col">
           <div className="mb-2 block">
-            <label className="text-white">Password</label>
+            <label className="text-white">Contraseña</label>
           </div>
           <input
             className="flex-1 bg-white text-gray-800 rounded-lg"
@@ -68,21 +68,21 @@ const LoginForm = () => {
           />
           {errors.password?.type === "required" && (
             <p className="text-red-700 mt-3 font-light leading-relaxed">
-              * You need to type a Password
+              * Debes introducir una contraseña
             </p>
           )}
           {errors.password?.type === "minLength" && (
             <p className="text-red-700 mt-3 font-light leading-relaxed">
-              * A password has at least 8 characters
+              * Una contraseña debe tener al menos 8 caracteres
             </p>
           )}
         </div>
         {incorrect && (
           <p className="text-red-700 mt-3 font-light leading-relaxed">
-            * Email and Password Incorrect, rewrite all and try again!
+            * El email y la constraseña son incorrectos, introdúcelos de nuevo
           </p>
         )}
-        <Button title="Sign in" />
+        <Button title="Iniciar Sesión" />
       </form>
     </div>
   );
