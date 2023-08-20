@@ -24,23 +24,25 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
   return (
     <div className="flex bg-[#DC6000] p-10 rounded-md w-[470px]">
       <div className="flex flex-1 flex-col justify-around">
-        <div className="my-2 flex flex-col">
-          <label className="text-white font-bold">Nombre Completo</label>
-          <div className="flex bg-white text-black text-center rounded-lg items-center justify-center h-[35px] mt-2">
+        <div className="flex flex-col">
+          <label className="text-white font-bold my-3">Nombre Completo</label>
+          <div className="flex bg-white text-black text-center rounded-lg items-center justify-center h-[35px] ">
             {employeeData.employeename}
           </div>
         </div>
 
-        <div className="my-2 flex flex-col">
-          <label className="text-white font-bold">Cargo</label>
-          <div className="flex bg-white text-black text-center rounded-lg items-center justify-center h-[35px] mt-2">
+        <div className="flex flex-col">
+          <label className="text-white font-bold my-3">Cargo</label>
+          <div className="flex bg-white text-black text-center rounded-lg items-center justify-center h-[35px]">
             {employeeData.cargo}
           </div>
         </div>
 
         <div className="my-2 flex flex-col">
-          <label className="text-white font-bold">Número de Contacto</label>
-          <div className="flex bg-white text-black text-center rounded-lg items-center justify-center h-[35px] mt-2">
+          <label className="text-white font-bold my-3">
+            Número de Contacto
+          </label>
+          <div className="flex bg-white text-black text-center rounded-lg items-center justify-center h-[35px] ">
             {employeeData.numero}
           </div>
         </div>

@@ -108,9 +108,7 @@ const EmployeeForm = () => {
               type="text"
               {...register("contact", {
                 required: true,
-                minLength: 8,
-                maxLength: 8,
-                pattern: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
+                pattern: /^[1-9][0-9]{7}$/,
               })}
             />
             {errors.contact?.type === "required" && (
@@ -121,16 +119,6 @@ const EmployeeForm = () => {
             {errors.contact?.type === "pattern" && (
               <p className="text-red-700 font-light leading-relaxed">
                 * Este no es un número de teléfono
-              </p>
-            )}
-            {errors.contact?.type === "minLength" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Debes introducir un número de télefono válido, 8 números
-              </p>
-            )}
-            {errors.contact?.type === "maxLength" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Debes introducir un número de télefono válido, 8 números
               </p>
             )}
           </div>
