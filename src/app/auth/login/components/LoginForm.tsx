@@ -24,10 +24,11 @@ const LoginForm = () => {
     ) {
       router.push("/dashboard/employees");
       login();
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("password", data.password);
     } else {
       setIncorrect(true);
     }
-    console.log(isLogged);
   };
 
   return (

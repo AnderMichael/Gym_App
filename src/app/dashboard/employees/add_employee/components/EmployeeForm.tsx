@@ -67,6 +67,7 @@ const EmployeeForm = () => {
                 required: true,
                 minLength: 6,
                 maxLength: 50,
+                pattern: /^[A-Z][a-zA-Z\s]*$/,
               })}
             />
             {errors.name?.type === "required" && (
@@ -82,6 +83,11 @@ const EmployeeForm = () => {
             {errors.name?.type === "maxLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
                 * El nombre debe ser de al menos 50 caracteres
+              </p>
+            )}
+            {errors.name?.type === "pattern" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * Este no es un nombre válido, nombres con mayúsculas
               </p>
             )}
           </div>
