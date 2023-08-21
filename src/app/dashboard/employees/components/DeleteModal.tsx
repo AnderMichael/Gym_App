@@ -2,7 +2,7 @@
 import React from "react";
 import useAxios from "axios-hooks";
 
-const DeleteModal = ({ isOpen, onClose, employee }:any) => {
+const DeleteModal = ({ isOpen, onClose, employee }: any) => {
   const [, execute] = useAxios(
     { url: `http://localhost:3000/employee/${employee?.id}`, method: "DELETE" },
     { manual: true }
@@ -28,10 +28,22 @@ const DeleteModal = ({ isOpen, onClose, employee }:any) => {
       ></div>
       <div className="bg-[#1E1E1E] p-5 rounded-md z-10 text-white">
         <h2 className="text-xl font-bold mb-4">Confirmar eliminación</h2>
-        <p>¿Estás seguro de borrar al siguiente usuario?</p>
-        <p>Nombre: {employee?.employeename}</p>
-        <p>Cargo: {employee?.cargo}</p>
-        <p>Celular: {employee?.numero}</p>
+        <p className="font-semibold font-poppins">
+          ¿Estás seguro de borrar al siguiente usuario?
+        </p>
+        <br />
+        <p>
+          <span className="font-bold font-poppins">Nombre:</span>{" "}
+          <span className="italic">{employee?.employeename}</span>
+        </p>
+        <p>
+          <span className="font-bold font-poppins">Cargo:</span>{" "}
+          <span className="italic">{employee?.cargo}</span>
+        </p>
+        <p>
+          <span className="font-bold font-poppins">Numero de Contacto:</span>{" "}
+          <span className="italic">{employee?.numero}</span>
+        </p>
 
         <div className="flex justify-end space-x-4 mt-5">
           <button

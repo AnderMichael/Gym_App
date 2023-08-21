@@ -9,7 +9,7 @@ export const Login = () => {
     <div className="flex inset-0 absolute">
       <div className="flex flex-1 bg-black" />
       <div className="flex flex-1 flex-col bg-[#CE0A0B] justify-center items-center">
-        <h1 className="text-[40px] text-white m-5 text-center font-bold">Are you ready{<br/>} to train?</h1>
+        <h1 className="text-[40px] text-white m-5 text-center font-bold">¿Listo para{<br/>} entrenar?</h1>
         <LoginForm />
       </div>
     </div>

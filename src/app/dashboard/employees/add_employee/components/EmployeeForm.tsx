@@ -28,7 +28,7 @@ const EmployeeForm = () => {
           data: {
             employeename: data.name,
             cargo: data.charge,
-            numero: data.CI,
+            numero: data.contact,
           },
         });
         router.back();
@@ -53,7 +53,7 @@ const EmployeeForm = () => {
   return (
     <div className="flex bg-[#DC6000] p-10 rounded-md">
       <form
-        className="flex flex-col space-y-4 md:space-y-6 w-[300px]"
+        className="flex flex-col space-y-4 md:space-y-6 w-[400px]"
         onSubmit={handleSubmit(onSubmitForm)}
       >
         <div className="flex flex-col">
@@ -67,21 +67,27 @@ const EmployeeForm = () => {
                 required: true,
                 minLength: 6,
                 maxLength: 50,
+                pattern: /^[A-Z][a-zA-Z\s]*$/,
               })}
             />
             {errors.name?.type === "required" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * You need to type a Name
+                * Debes introducir un nombre
               </p>
             )}
-            {errors.minLenght?.type === "required" && (
+            {errors.name?.type === "minLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * You need to type a name of min 6 characters
+                * El nombre debe ser de al menos 6 caracteres
               </p>
             )}
-            {errors.maxLenght?.type === "required" && (
+            {errors.name?.type === "maxLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * You need to type a name of max 50 characters
+                * El nombre debe ser de al menos 50 caracteres
+              </p>
+            )}
+            {errors.name?.type === "pattern" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * Este no es un nombre válido, nombres con mayúsculas
               </p>
             )}
           </div>
@@ -92,16 +98,11 @@ const EmployeeForm = () => {
             <select
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="Cargo"
-              {...register("charge", { required: true })}
+              {...register("charge")}
             >
-              <option value="trainer">Trainer</option>
-              <option value="cleaner">Cleaner</option>
+              <option value="trainer">Entrenador</option>
+              <option value="cleaner">Conserje</option>
             </select>
-            {errors.charge?.type === "required" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * You need to type a Charge
-              </p>
-            )}
           </div>
         </div>
         <div className="flex flex-col">
@@ -111,21 +112,39 @@ const EmployeeForm = () => {
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="66666666"
               type="text"
-              {...register("CI", { required: true, minLength: 8 })}
+              {...register("contact", {
+                required: true,
+                pattern: /^[1-9][0-9]{7}$/,
+              })}
             />
-            {errors.CI?.type === "required" && (
+            {errors.contact?.type === "required" && (
               <p className="text-red-700 font-light leading-relaxed">
-                * You need to type a Phone Number
+                * Debes introducir un número de télefono
+              </p>
+            )}
+            {errors.contact?.type === "pattern" && (
+              <p className="text-red-700 font-light leading-relaxed">
+                * Este no es un número de teléfono
               </p>
             )}
           </div>
         </div>
-        <div className="flex justify-center">
-          <div className="flex flex-1">
-            <Button title="Register" onClick={registration} />
+        <div className="flex justify-between">
+          <div className="flex flex-1 mx-1">
+            <button
+              className="flex-1 bg-[#1AC317] p-2 text-white rounded-xl hover:bg-[#246623] "
+              onClick={registration}
+            >
+              <h1 className="font-semibold">Registrar</h1>
+            </button>
           </div>
-          <div className="flex flex-1">
-            <Button title="Cancel" onClick={cancellation} />
+          <div className="flex flex-1 mx-1">
+            <button
+              className="flex-1 bg-[#CE0A0B] p-2 text-white rounded-xl hover:bg-[#782828] "
+              onClick={cancellation}
+            >
+              <h1 className="font-semibold">Cancelar</h1>
+            </button>
           </div>
         </div>
       </form>
