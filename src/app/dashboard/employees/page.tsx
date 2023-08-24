@@ -1,16 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
 import { EyeIcon, PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 
 const EmployeePage = () => {
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.get("added")) {
+      
+      router.refresh();
+    }
+  }, []);
+
+
   const [{ data: employeesData, loading, error }, refetch] = useAxios(
     "http://localhost:3000/employee"
   );
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
-  const router = useRouter();
+  
 
   const handleAddEmployee = () => {
     router.push("/dashboard/employees/add_employee");

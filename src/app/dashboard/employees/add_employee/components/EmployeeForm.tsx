@@ -33,8 +33,9 @@ const EmployeeForm = () => {
             numero: data.contact,
           },
         });
-        router.push("/dashboard/employees");
-        //window.location.reload();
+        
+        router.push("/dashboard/employees?added");
+           
       } catch (error) {
         console.error("Hubo un error al enviar los datos:", error);
       }

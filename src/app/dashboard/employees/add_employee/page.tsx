@@ -4,6 +4,7 @@ import React from "react";
 import EmployeeForm from "./components/EmployeeForm";
 
 const addEmployee = () => {
+
   return (
     <div className="flex inset-0 absolute">
       <div className="flex flex-1 bg-black justify-center items-center">
