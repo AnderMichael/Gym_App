@@ -11,9 +11,12 @@ const EmployeePage = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    if (queryParams.get("added")) {
-      
-      router.refresh();
+    if (queryParams.has("added")) {
+      console.log("888")
+      queryParams.delete("added");
+    window.history.replaceState({}, document.title, `${window.location.pathname}?${queryParams}`);
+    window.location.reload();
+     
     }
   }, []);
 
