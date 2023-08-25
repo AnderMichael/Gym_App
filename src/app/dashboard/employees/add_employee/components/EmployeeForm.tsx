@@ -4,6 +4,8 @@ import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+
+
 const EmployeeForm = () => {
   // ! Hooks para el form
   const router = useRouter(); // NOTE: Para redirigir paginas
@@ -31,8 +33,9 @@ const EmployeeForm = () => {
             numero: data.contact,
           },
         });
-        router.back();
-        window.location.reload();
+        
+        router.push("/dashboard/employees?added");
+           
       } catch (error) {
         console.error("Hubo un error al enviar los datos:", error);
       }
