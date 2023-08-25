@@ -6,26 +6,26 @@ import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 
 const EmployeePage = () => {
-
   const router = useRouter();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.has("added")) {
-      console.log("888")
+      console.log("888");
       queryParams.delete("added");
-    window.history.replaceState({}, document.title, `${window.location.pathname}?${queryParams}`);
-    window.location.reload();
-     
+      window.history.replaceState(
+        {},
+        document.title,
+        `${window.location.pathname}?${queryParams}`
+      );
+      window.location.reload();
     }
   }, []);
-
 
   const [{ data: employeesData, loading, error }, refetch] = useAxios(
     "http://localhost:3000/employee"
   );
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
-  
 
   const handleAddEmployee = () => {
     router.push("/dashboard/employees/add_employee");
@@ -43,6 +43,21 @@ const EmployeePage = () => {
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error al cargar los datos.</p>;
 
+  interface Employee {
+    id: number;
+    employeename: string;
+    cargo: string;
+    numero: number;
+  }
+
+  const sortByEmployeeName = (employees: Employee[]): Employee[] => {
+    return employees
+      .slice()
+      .sort((a, b) => a.employeename.localeCompare(b.employeename));
+  };
+
+  const sortedEmployeesData = sortByEmployeeName(employeesData)
+  
   return (
     <>
       <div className="container mx-auto p-4 w-[70%]">
@@ -74,7 +89,7 @@ const EmployeePage = () => {
             </tr>
           </thead>
           <tbody>
-            {employeesData.map((employee: any) => (
+            {sortedEmployeesData.map((employee: any) => (
               <tr
                 key={employee.id}
                 className={employee.id % 2 === 0 ? "bg-gray-100" : ""}

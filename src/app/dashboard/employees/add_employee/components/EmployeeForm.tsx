@@ -80,12 +80,12 @@ const EmployeeForm = () => {
             )}
             {errors.name?.type === "minLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe ser de al menos 6 caracteres
+                * El nombre debe ser tener 6 caracteres como mínimo
               </p>
             )}
             {errors.name?.type === "maxLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe ser de al menos 50 caracteres
+                * El nombre debe tener 50 caracteres como máximo
               </p>
             )}
             {errors.name?.type === "pattern" && (
