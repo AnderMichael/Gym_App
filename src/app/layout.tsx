@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { AuthProvider } from "../app/context/authContext";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({ subsets: ["latin"], weight: "400", display: "swap" });
 
@@ -18,6 +20,9 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
+        <div className="toast-container">
+          <ToastContainer limit={2} theme="colored" />
+        </div>
         <body className={poppins.className}>{children}</body>
       </html>
     </AuthProvider>
