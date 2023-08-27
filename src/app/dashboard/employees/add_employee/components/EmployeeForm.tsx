@@ -4,7 +4,7 @@ import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 
 const EmployeeForm = () => {
   // ! Hooks para el form
@@ -33,10 +33,9 @@ const EmployeeForm = () => {
             numero: data.contact,
           },
         });
-        
         router.push("/dashboard/employees?added");
-           
       } catch (error) {
+        router.push("/dashboard/employees?error");
         console.error("Hubo un error al enviar los datos:", error);
       }
     }
@@ -103,8 +102,8 @@ const EmployeeForm = () => {
               placeholder="Cargo"
               {...register("charge")}
             >
-              <option value="trainer">Entrenador</option>
-              <option value="cleaner">Conserje</option>
+              <option value="Entrenador">Entrenador</option>
+              <option value="Conserje">Conserje</option>
             </select>
           </div>
         </div>

@@ -24,7 +24,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLogged, setIsLogged] = useState<boolean>(() => {
     // Retrieve authentication status from localStorage on component initialization
-    return JSON.parse(localStorage.getItem('isLogged') || 'false');
+    return JSON.parse(window.localStorage.getItem('isLogged') || 'false');
   });
 
   const login = () => {

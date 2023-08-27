@@ -4,6 +4,7 @@ import useAxios from "axios-hooks";
 import { EyeIcon, PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
+import { toast } from "react-toastify";
 
 const EmployeePage = () => {
   const router = useRouter();
@@ -11,15 +12,46 @@ const EmployeePage = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.has("added")) {
-      console.log("888");
       queryParams.delete("added");
       window.history.replaceState(
         {},
         document.title,
-        `${window.location.pathname}?${queryParams}`
+        `${window.location.pathname}${queryParams}`
       );
+      sessionStorage.setItem("notification", "added");
       window.location.reload();
+    } else {
+      if (queryParams.has("error")) {
+        queryParams.delete("error");
+        window.history.replaceState(
+          {},
+          document.title,
+          `${window.location.pathname}${queryParams}`
+        );
+        toast.error("Empleado no añadido", { autoClose: 3000 });
+      }
     }
+    window.onload = () => {
+      let notification = sessionStorage.getItem("notification");
+      if (notification != null) {
+        if (notification === "added") {
+          toast.success("Empleado agregado exitosamente", {
+            autoClose: 3000,
+            position: "bottom-right",
+            theme: "colored",
+            style: {fontFamily: "inherit"},
+          });
+        } else if (notification === "deleted") {
+          toast.success("Empleado eliminado exitosamente", {
+            autoClose: 3000,
+            position: "bottom-right",
+            theme: "colored",
+            style: {fontFamily: "inherit"},
+          });
+        }
+        sessionStorage.removeItem("notification");
+      }
+    };
   }, []);
 
   const [{ data: employeesData, loading, error }, refetch] = useAxios(
@@ -56,8 +88,8 @@ const EmployeePage = () => {
       .sort((a, b) => a.employeename.localeCompare(b.employeename));
   };
 
-  const sortedEmployeesData = sortByEmployeeName(employeesData)
-  
+  const sortedEmployeesData = sortByEmployeeName(employeesData);
+
   return (
     <>
       <div className="container mx-auto p-4 w-[70%]">
