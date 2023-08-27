@@ -28,21 +28,25 @@ const EmployeePage = () => {
           document.title,
           `${window.location.pathname}${queryParams}`
         );
-        toast.success("Empleado no añadido", { autoClose: 3000 });
+        toast.error("Empleado no añadido", { autoClose: 3000 });
       }
     }
     window.onload = () => {
       let notification = sessionStorage.getItem("notification");
       if (notification != null) {
         if (notification === "added") {
-          toast.success("Empleado añadido", {
+          toast.success("Empleado agregado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
+            theme: "colored",
+            style: {fontFamily: "inherit"},
           });
         } else if (notification === "deleted") {
-          toast.success("Empleado eliminado", {
+          toast.success("Empleado eliminado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
+            theme: "colored",
+            style: {fontFamily: "inherit"},
           });
         }
         sessionStorage.removeItem("notification");
