@@ -47,7 +47,7 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
           </div>
         </div>
         <div className="my-2 flex flex-col">
-          <Button title="Close" onClick={closeView} color="#15133B" />
+          <Button title="Cerrar" onClick={closeView} color="#15133B" />
         </div>
       </div>
     </div>
