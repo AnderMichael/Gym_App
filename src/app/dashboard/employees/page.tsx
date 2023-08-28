@@ -1,16 +1,63 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
 import { EyeIcon, PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
+import { toast } from "react-toastify";
 
 const EmployeePage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.has("added")) {
+      queryParams.delete("added");
+      window.history.replaceState(
+        {},
+        document.title,
+        `${window.location.pathname}${queryParams}`
+      );
+      sessionStorage.setItem("notification", "added");
+      window.location.reload();
+    } else {
+      if (queryParams.has("error")) {
+        queryParams.delete("error");
+        window.history.replaceState(
+          {},
+          document.title,
+          `${window.location.pathname}${queryParams}`
+        );
+        toast.error("Empleado no añadido", { autoClose: 3000 });
+      }
+    }
+    window.onload = () => {
+      let notification = sessionStorage.getItem("notification");
+      if (notification != null) {
+        if (notification === "added") {
+          toast.success("Empleado agregado exitosamente", {
+            autoClose: 3000,
+            position: "bottom-right",
+            theme: "colored",
+            style: {fontFamily: "inherit"},
+          });
+        } else if (notification === "deleted") {
+          toast.success("Empleado eliminado exitosamente", {
+            autoClose: 3000,
+            position: "bottom-right",
+            theme: "colored",
+            style: {fontFamily: "inherit"},
+          });
+        }
+        sessionStorage.removeItem("notification");
+      }
+    };
+  }, []);
+
   const [{ data: employeesData, loading, error }, refetch] = useAxios(
     "http://localhost:3000/employee"
   );
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
-  const router = useRouter();
 
   const handleAddEmployee = () => {
     router.push("/dashboard/employees/add_employee");
@@ -28,11 +75,26 @@ const EmployeePage = () => {
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error al cargar los datos.</p>;
 
+  interface Employee {
+    id: number;
+    employeename: string;
+    cargo: string;
+    numero: number;
+  }
+
+  const sortByEmployeeName = (employees: Employee[]): Employee[] => {
+    return employees
+      .slice()
+      .sort((a, b) => a.employeename.localeCompare(b.employeename));
+  };
+
+  const sortedEmployeesData = sortByEmployeeName(employeesData);
+
   return (
     <>
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-2xl font-bold ">Employees</h1>
+          <h1 className="text-white font-extrabold text-4xl ">Empleados</h1>
           <button onClick={handleAddEmployee}>
             <PlusCircleIcon className="h-20 w-20 text-blue-500 hover:text-blue-700" />
           </button>
@@ -41,17 +103,17 @@ const EmployeePage = () => {
         <table className="w-full table-auto">
           <thead>
             <tr>
-              <th className="text-white bg-[#15133B] border px-4 py-2">
+              <th className="text-white font-bold bg-[#15133B] border px-4 py-2">
                 Nombre Completo
               </th>
-              <th className="text-white bg-[#15133B] border px-4 py-2">
+              <th className="text-white font-bold bg-[#15133B] border px-4 py-2">
                 Cargo
               </th>
-              <th className="text-white bg-[#15133B] border px-4 py-2">
+              <th className="text-white font-bold bg-[#15133B] border px-4 py-2">
                 Número de Contacto
               </th>
               <th
-                className="text-white bg-[#15133B] border px-4 py-2"
+                className="text-white font-bold bg-[#15133B] border px-4 py-2"
                 colSpan={2}
               >
                 Acciones
@@ -59,12 +121,12 @@ const EmployeePage = () => {
             </tr>
           </thead>
           <tbody>
-            {employeesData.map((employee: any) => (
+            {sortedEmployeesData.map((employee: any) => (
               <tr
                 key={employee.id}
                 className={employee.id % 2 === 0 ? "bg-gray-100" : ""}
               >
-                <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                <td className="text-black font-light bg-[#B0ADEA] border px-4 py-2">
                   {employee.employeename}
                 </td>
                 <td className="text-black bg-[#B0ADEA] border px-4 py-2">

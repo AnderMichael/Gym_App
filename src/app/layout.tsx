@@ -1,9 +1,11 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Lemon } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { AuthProvider } from "../app/context/authContext";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const lemon = Lemon({ subsets: ["latin"], weight: "400", display: "swap" });
+const poppins = Poppins({ subsets: ["latin"], weight: "400", display: "swap" });
 
 export const metadata: Metadata = {
   title: "GYM APP",
@@ -18,7 +20,10 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
-        <body className={lemon.className}>{children}</body>
+        <div className="toast-container">
+          <ToastContainer limit={2} theme="colored" />
+        </div>
+        <body className={poppins.className}>{children}</body>
       </html>
     </AuthProvider>
   );
