@@ -22,7 +22,7 @@ const LoginForm = () => {
       data.email === "panque.sito@hotcake.com" &&
       data.password === "ChantilinConHelado"
     ) {
-      router.push("/dashboard/employees");
+      router.push("/dashboard");
       login();
     } else {
       setIncorrect(true);
