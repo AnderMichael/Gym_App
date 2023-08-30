@@ -30,17 +30,19 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex bg-black p-10 rounded-md">
+    <div className="flex bg-white p-10 rounded-lg">
       <form
         className="flex flex-col space-y-4 md:space-y-6 h-[50%] w-[270px]"
         onSubmit={handleSubmit(checkUser)}
       >
         <div className="flex flex-1 flex-col">
           <div className="mb-2 block">
-            <label className="text-white">Email</label>
+            <label className="text-[#302E46] font-semibold text-xl font-jost">
+              Correo Electrónico
+            </label>
           </div>
           <input
-            className="flex-1 bg-white text-gray-800 rounded-lg"
+            className="flex-1 bg-white text-gray-800 rounded-lg font-josefin font-light"
             placeholder="usuario@email.com"
             type="text"
             {...register("email", {
@@ -49,39 +51,46 @@ const LoginForm = () => {
             })}
           />
           {errors.email?.type === "required" && (
-            <p className="text-red-700 mt-3">* Debes introducir un email</p>
+            <p className="text-red-700 mt-2 font-normal font-jost">
+              * Debes introducir un correo
+            </p>
           )}
           {errors.email?.type === "pattern" && (
-            <p className="text-red-700 mt-3">* Introduce un email válido</p>
+            <p className="text-red-700 mt-2 font-normal font-jost">
+              * Introduce un correo válido
+            </p>
           )}
         </div>
         <div className="flex flex-1 flex-col">
           <div className="mb-2 block">
-            <label className="text-white">Contraseña</label>
+            <label className="text-[#302E46] font-semibold font-jost text-xl">
+              Contraseña
+            </label>
           </div>
           <input
-            className="flex-1 bg-white text-gray-800 rounded-lg"
+            className="flex-1 bg-white text-gray-800 rounded-lg font-josefin"
             placeholder="°°°°°°°°"
             type="password"
             {...register("password", { required: true, minLength: 8 })}
           />
           {errors.password?.type === "required" && (
-            <p className="text-red-700 mt-3 font-light leading-relaxed">
+            <p className="text-red-700 mt-2 font-normal leading-relaxed font-jost ">
               * Debes introducir una contraseña
             </p>
           )}
           {errors.password?.type === "minLength" && (
-            <p className="text-red-700 mt-3 font-light leading-relaxed">
+            <p className="text-red-700 mt-2 font-normal leading-relaxed font-jost">
               * Una contraseña debe tener al menos 8 caracteres
             </p>
           )}
         </div>
         {incorrect && (
-          <p className="text-red-700 mt-3 font-light leading-relaxed">
-            * El email y la constraseña son incorrectos, introdúcelos de nuevo
+          <p className="text-red-700 mt-2 font-normal leading-relaxed font-jost">
+            * El correo y la contraseña son incorrectos, introdúcelos de nuevo
           </p>
         )}
-        <Button title="Iniciar Sesión" />
+        <Button title="Ingresar" color="#EA9553" hover="#DC6000" />
+        
       </form>
     </div>
   );
