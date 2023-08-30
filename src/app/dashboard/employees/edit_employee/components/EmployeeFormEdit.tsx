@@ -1,10 +1,8 @@
 "use client";
-import Button from "@/components/Button";
 import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 interface EmployeeProfileProps {
   employeeData: any;
@@ -156,7 +154,7 @@ const EmployeeFormEdit = ({ employeeData }: EmployeeProfileProps) => {
               className="flex-1 bg-[#1AC317] p-2 text-white rounded-xl hover:bg-[#246623] "
               onClick={registration}
             >
-              <h1 className="font-semibold">Registrar</h1>
+              <h1 className="font-semibold">Actualizar</h1>
             </button>
           </div>
           <div className="flex flex-1 mx-1">

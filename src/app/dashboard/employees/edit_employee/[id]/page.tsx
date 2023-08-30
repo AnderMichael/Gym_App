@@ -21,6 +21,9 @@ const EditEmployee = ({ params, searchParams }: TokenProps) => {
 
   return (
     <div className="flex flex-col inset-0 justify-center items-center absolute">
+      <h1 className="absolute top-10 left-20 text-[px] text-[#302E46] my-5 text-left  text-4xl font-black font-jost">
+        Editar Empleado
+      </h1>
       <EmployeeFormEdit employeeData={employeeData} />
     </div>
   );
