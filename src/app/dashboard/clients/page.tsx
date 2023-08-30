@@ -40,7 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const styles = {
   orangeButton: {
-    backgroundColor: 'orange',
+    backgroundColor: '#DC6000',
     color: 'white',
     '&:hover': {
       backgroundColor: 'darkorange',
