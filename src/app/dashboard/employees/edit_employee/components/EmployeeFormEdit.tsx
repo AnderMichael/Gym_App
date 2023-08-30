@@ -12,21 +12,28 @@ interface EmployeeProfileProps {
 
 const EmployeeFormEdit = ({ employeeData }: EmployeeProfileProps) => {
   // ! Hooks para el form
-  const router = useRouter(); // NOTE: Para redirigir paginas
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm(); // NOTE: Para hacer validaciones en el formulario
+  const router = useRouter();
+  const [isCancel, setIsCancel] = useState(true);
 
-  const [{ loading: updateLoading, error: updateError }, updateEmployee] =
-    useAxios(
-      {
-        method: "PATCH", // or 'PATCH' based on your API
-        url: `http://localhost:3000/employee/${employeeData.id}`, // Replace with your API endpoint
-      },
-      { manual: true }
-    );
+
+
+  const [{ loading: updateLoading, error: updateError }, updateEmployee] = useAxios(
+    {
+      method: "PATCH",
+      url: `http://localhost:3000/employee/${employeeData.id}`,
+    },
+    { manual: true }
+  );
+
+
+
+  const { register, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      name: employeeData?.employeename,
+      charge: employeeData?.cargo,
+      contact: employeeData?.numero,
+    },
+  });
 
   if (updateLoading) return <div>Loading...</div>;
   if (updateError) return <div>Error: {updateError.message}</div>;
@@ -43,13 +50,12 @@ const EmployeeFormEdit = ({ employeeData }: EmployeeProfileProps) => {
         });
         router.push("/dashboard/employees?edited");
       } catch (error) {
+        console.log(error)
         router.push("/dashboard/employees?error");
         console.error("Hubo un error al actualizar los datos:", error);
       }
     }
   };
-
-  const [isCancel, setIsCancel] = useState(true);
 
   const registration = () => {
     setIsCancel(true);

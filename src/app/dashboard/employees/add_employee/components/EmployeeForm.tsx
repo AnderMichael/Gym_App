@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 const EmployeeForm = () => {
   // ! Hooks para el form
   const router = useRouter(); // NOTE: Para redirigir paginas
+  const [isCancel, setIsCancel] = useState(true);
   const {
     register,
     formState: { errors },
@@ -40,8 +41,6 @@ const EmployeeForm = () => {
       }
     }
   };
-
-  const [isCancel, setIsCancel] = useState(true);
 
   const registration = () => {
     setIsCancel(true);
