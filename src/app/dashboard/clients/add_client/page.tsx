@@ -2,7 +2,7 @@
 
 import React from "react";
 import ClientForm from "../components/ClientForm";
-import {Button} from '@mui/material';
+
 import { useRouter } from "next/navigation";
 
 
@@ -29,7 +29,7 @@ const addClient = () => {
           <h1 className="text-[#302E46] font-extrabold text-4xl ">
             Nuevo Cliente
           </h1>
-          <Button onClick={handleBackToClients} variant="contained" style={styles.orangeButton}>Volver a los clientes</Button>         
+          <button onClick={handleBackToClients} type="button" className="text-white bg-[#DC6000] hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Volver a los clientes</button>         
         </div>
         <ClientForm />
       </div>
