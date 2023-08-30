@@ -71,42 +71,41 @@ const DeleteModal = ({ isOpen, onClose, employee }: any) => {
           </button>
         </div>
       ) : (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 font-jost">
           <div
             className="absolute top-0 left-0 w-full h-full bg-black opacity-50"
             onClick={onClose}
           ></div>
-          <div className="bg-[#1E1E1E] p-5 rounded-md z-10 text-white">
-            <h2 className="text-xl font-bold mb-4">Confirmar eliminación</h2>
-            <p className="font-semibold font-poppins">
-              ¿Estás seguro de borrar al siguiente usuario?
+          <div className="bg-[#f2f2f2] p-5 rounded-lg z-10 text-[#3D3C51]">
+            <p className="font-bold text-xl m-4">
+              ¿Está seguro de eliminar al siguiente empleado?
             </p>
-            <br />
-            <p>
-              <span className="font-bold font-poppins">Nombre:</span>{" "}
-              <span className="italic">{employee?.employeename}</span>
+            
+            <p className="text-xl m-4">
+              <span className="font-bold">Nombre:</span>{" "}
+              <span className="">{employee?.employeename}</span>
             </p>
-            <p>
-              <span className="font-bold font-poppins">Cargo:</span>{" "}
-              <span className="italic">{employee?.cargo}</span>
+            <p className="text-xl m-4">
+              <span className="font-bold ">Cargo:</span>{" "}
+              <span className="">{employee?.cargo}</span>
             </p>
-            <p>
-              <span className="font-bold font-poppins">
+            <p className="text-xl m-4">
+              <span className="font-bold">
                 Numero de Contacto:
               </span>{" "}
-              <span className="italic">{employee?.numero}</span>
+              <span className="">{employee?.numero}</span>
             </p>
 
-            <div className="flex justify-end space-x-4 mt-5">
+            <div className="flex justify-end space-x-4 mt-5 font-bold">
               <button
-                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md"
+                className="flex-1 px-4 py-2 bg-[#3A7E3D] text-white rounded-xl"
                 onClick={handleDelete}
               >
                 Sí, obviamente
               </button>
 
               <button
-                className="flex-1 px-4 py-2 bg-gray-300 text-black rounded-md"
+                className="flex-1 px-4 py-2 bg-[#CE0A0B] text-white rounded-xl"
                 onClick={onClose}
               >
                 No, me arrepentí

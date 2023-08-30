@@ -106,7 +106,7 @@ const ClientsPage = () => {
 
   return (
     <>
-      <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#F2F2F2] p-4" >
+      <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center">
           <h1 className="text-[#1F1C53] font-extrabold text-4xl ">Clientes</h1>
           
