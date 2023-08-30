@@ -141,14 +141,7 @@ const ClientForm = () => {
               <h1 className="font-semibold">Registrar</h1>
             </button>
           </div>
-          <div className="flex flex-1 mx-1">
-            <button
-              className="flex-1 bg-[#CE0A0B] p-2 text-white rounded-xl hover:bg-[#782828] "
-              onClick={cancellation}
-            >
-              <h1 className="font-semibold">Cancelar</h1>
-            </button>
-          </div>
+          
         </div>
       </form>
     </div>
