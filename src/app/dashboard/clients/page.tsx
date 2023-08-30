@@ -140,13 +140,16 @@ const ClientsPage = () => {
                 className={client.id % 2 === 0 ? "bg-gray-100" : ""}
               >
                 <td className="text-black font-light bg-[#B0ADEA] border px-4 py-2">
-                  {client.clientname}
+                  {client.clientFirstName}
                 </td>
                 <td className="text-black bg-[#B0ADEA] border px-4 py-2">
-                  {client.cargo}
+                  {client.clientLastName}
                 </td>
                 <td className="text-black bg-[#B0ADEA] border px-4 py-2">
-                  {client.numero}
+                  {client.createdDate}
+                </td>
+                <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  {client.planType}
                 </td>
                 <td className="text-black bg-[#B0ADEA] border px-4 py-2">
                   <button onClick={() => handleView(client)}>
