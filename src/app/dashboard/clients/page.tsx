@@ -5,36 +5,7 @@ import { EyeIcon, PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
-import {Button, colors} from '@mui/material';
-import { makeStyles } from '@mui//material/styles';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Card from '@mui/material/Card';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#1F1C53',
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
 
 
 
@@ -137,37 +108,62 @@ const ClientsPage = () => {
     <>
       <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#F2F2F2] p-4" >
         <div className="flex justify-between items-center">
-          <h1 className="text-[#000000] font-extrabold text-4xl ">Clientes</h1>
+          <h1 className="text-[#1F1C53] font-extrabold text-4xl ">Clientes</h1>
           
-          <Button onClick={handleAddClient} variant="contained" style={styles.orangeButton}>Añadir cliente</Button>
+          <button type="button" className="text-white bg-[#DC6000] hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Añadir clientes</button>
+        </div>
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-white uppercase bg-[#1F1C53] dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                      <th scope="col" className="px-6 py-3">
+                          Nombres
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                          Apellidos
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                          Fecha de registro
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                          Plan
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                          
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+              {sortedClientsData.map((client: any) => (
+              <tr
+                key={client.id}
+                className={client.id % 2 === 0 ? "bg-gray-100" : ""}
+              >
+                <td className="text-black font-light bg-[#B0ADEA] border px-4 py-2">
+                  {client.clientname}
+                </td>
+                <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  {client.cargo}
+                </td>
+                <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  {client.numero}
+                </td>
+                <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <button onClick={() => handleView(client)}>
+                    <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
+                  </button>
+                </td>
+                <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <button onClick={() => promptToDelete(client)}>
+                    <TrashIcon className="h-5 w-5 text-red-500 hover:text-red-700" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+              </tbody>
+          </table>
         </div>
         
-        <TableContainer component={Card}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Nombres</StyledTableCell>
-                  <StyledTableCell align="right">Apellidos</StyledTableCell>
-                  <StyledTableCell align="right">Fecha de registro</StyledTableCell>
-                  <StyledTableCell align="right">Plan</StyledTableCell>
-                  <StyledTableCell align="right">Acion(temporal)</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {sortedClientsData.map((row) => (
-                  <StyledTableRow key={row.id}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.clientFirstName}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{row.clientLastName}</StyledTableCell>
-                    <StyledTableCell align="right">{row.createdDate}</StyledTableCell>
-                    <StyledTableCell align="right">{row.planType}</StyledTableCell>
-                    
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-      </TableContainer>
       </div>
       <DeleteModal
         isOpen={!!clientToDelete}
