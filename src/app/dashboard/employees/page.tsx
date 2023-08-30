@@ -5,7 +5,6 @@ import { EyeIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
-import AddModal from "./components/AddModal";
 
 const EmployeePage = () => {
   const router = useRouter();
@@ -56,7 +55,6 @@ const EmployeePage = () => {
     };
   }, []);
 
-  
   const [{ data: employeesData, loading, error }, refetch] = useAxios(
     "http://localhost:3000/employee"
   );
@@ -94,6 +92,23 @@ const EmployeePage = () => {
 
   return (
     <>
+      <button
+        className="absolute top-[4rem] ml-14 text-blue-950"
+        onClick={() => router.back()}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9.53 2.47a.75.75 0 010 1.06L4.81 8.25H15a6.75 6.75 0 010 13.5h-3a.75.75 0 010-1.5h3a5.25 5.25 0 100-10.5H4.81l4.72 4.72a.75.75 0 11-1.06 1.06l-6-6a.75.75 0 010-1.06l6-6a.75.75 0 011.06 0z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center m-5">
           <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
@@ -126,7 +141,9 @@ const EmployeePage = () => {
                       : "bg-white text-center font-normal font-jost"
                   }
                 >
-                  <td className="text-black px-4 py-2">{employee.employeename}</td>
+                  <td className="text-black px-4 py-2">
+                    {employee.employeename}
+                  </td>
                   <td className="text-black px-4 py-2">{employee.cargo}</td>
                   <td className="text-black px-4 py-2">{employee.numero}</td>
                   <td className="text-black px-4 py-2">
