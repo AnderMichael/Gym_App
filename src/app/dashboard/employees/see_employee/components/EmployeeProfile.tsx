@@ -15,7 +15,7 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
   );
 
   const closeView = () => {
-    router.push("/dashboard/employees");
+    router.back();
   };
 
   if (loading) return <p>Cargando...</p>;

@@ -5,7 +5,6 @@ import { EyeIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
-import AddModal from "./components/AddModal";
 
 const EmployeePage = () => {
   const router = useRouter();
@@ -21,6 +20,17 @@ const EmployeePage = () => {
         `${window.location.pathname}${queryParams}`
       );
       sessionStorage.setItem("notification", "added");
+      router.back();
+      window.location.reload();
+    } else if (queryParams.has("edited")) {
+      queryParams.delete("edited");
+      window.history.replaceState(
+        {},
+        document.title,
+        `${window.location.pathname}${queryParams}`
+      );
+      sessionStorage.setItem("notification", "edited");
+      router.back();
       window.location.reload();
     } else {
       if (queryParams.has("error")) {
@@ -30,7 +40,13 @@ const EmployeePage = () => {
           document.title,
           `${window.location.pathname}${queryParams}`
         );
-        toast.error("Empleado no añadido", { autoClose: 3000 });
+        router.back();
+        toast.error("Hubo un error en el proceso", {
+          autoClose: 3000,
+          position: "bottom-right",
+          theme: "colored",
+          style: { fontFamily: "inherit" },
+        });
       }
     }
     window.onload = () => {
@@ -50,13 +66,19 @@ const EmployeePage = () => {
             theme: "colored",
             style: { fontFamily: "inherit" },
           });
+        } else if (notification === "edited") {
+          toast.success("Empleado actulizado exitosamente", {
+            autoClose: 3000,
+            position: "bottom-right",
+            theme: "colored",
+            style: { fontFamily: "inherit" },
+          });
         }
         sessionStorage.removeItem("notification");
       }
     };
   }, []);
 
-  
   const [{ data: employeesData, loading, error }, refetch] = useAxios(
     "http://localhost:3000/employee"
   );
@@ -66,12 +88,11 @@ const EmployeePage = () => {
   };
 
   const handleView = (employee: any) => {
-    console.log("Viewing:", employee);
     router.push(`/dashboard/employees/see_employee/${employee.id}`);
   };
 
-  const promptToDelete = (employee: any) => {
-    setEmployeeToDelete(employee);
+  const handleEdit = (employee: any) => {
+    router.push(`/dashboard/employees/edit_employee/${employee.id}`);
   };
 
   if (loading) return <p>Cargando...</p>;
@@ -84,6 +105,9 @@ const EmployeePage = () => {
     numero: number;
   }
 
+  const promptToDelete = (employee: any) => {
+    setEmployeeToDelete(employee);
+  };
   const sortByEmployeeName = (employees: Employee[]): Employee[] => {
     return employees
       .slice()
@@ -94,6 +118,23 @@ const EmployeePage = () => {
 
   return (
     <>
+      <button
+        className="absolute top-[4rem] ml-14 text-blue-950"
+        onClick={() => router.back()}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9.53 2.47a.75.75 0 010 1.06L4.81 8.25H15a6.75 6.75 0 010 13.5h-3a.75.75 0 010-1.5h3a5.25 5.25 0 100-10.5H4.81l4.72 4.72a.75.75 0 11-1.06 1.06l-6-6a.75.75 0 010-1.06l6-6a.75.75 0 011.06 0z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center m-5">
           <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
@@ -126,7 +167,9 @@ const EmployeePage = () => {
                       : "bg-white text-center font-normal font-jost"
                   }
                 >
-                  <td className="text-black px-4 py-2">{employee.employeename}</td>
+                  <td className="text-black px-4 py-2">
+                    {employee.employeename}
+                  </td>
                   <td className="text-black px-4 py-2">{employee.cargo}</td>
                   <td className="text-black px-4 py-2">{employee.numero}</td>
                   <td className="text-black px-4 py-2">
@@ -135,7 +178,7 @@ const EmployeePage = () => {
                     </button>
                   </td>
                   <td className="text-black   px-4 py-2">
-                    <button onClick={() => handleView(employee)}>
+                    <button onClick={() => handleEdit(employee)}>
                       <PencilAltIcon className="h-7 w-7 text-[#1A4E1C] hover:text-[#447646]" />
                     </button>
                   </td>
