@@ -1,7 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
-import { EyeIcon, PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
+import {
+  EyeIcon,
+  PlusCircleIcon,
+  TrashIcon,
+  PencilIcon,
+} from "@heroicons/react/solid";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
@@ -20,6 +25,15 @@ const EmployeePage = () => {
       );
       sessionStorage.setItem("notification", "added");
       window.location.reload();
+    } else if (queryParams.has("edited")) {
+      queryParams.delete("edited");
+      window.history.replaceState(
+        {},
+        document.title,
+        `${window.location.pathname}${queryParams}`
+      );
+      sessionStorage.setItem("notification", "edited");
+      window.location.reload();
     } else {
       if (queryParams.has("error")) {
         queryParams.delete("error");
@@ -28,7 +42,12 @@ const EmployeePage = () => {
           document.title,
           `${window.location.pathname}${queryParams}`
         );
-        toast.error("Empleado no añadido", { autoClose: 3000 });
+        toast.error("Hubo un error en el proceso", {
+          autoClose: 3000,
+          position: "bottom-right",
+          theme: "colored",
+          style: { fontFamily: "inherit" },
+        });
       }
     }
     window.onload = () => {
@@ -39,14 +58,21 @@ const EmployeePage = () => {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
-            style: {fontFamily: "inherit"},
+            style: { fontFamily: "inherit" },
           });
         } else if (notification === "deleted") {
           toast.success("Empleado eliminado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
-            style: {fontFamily: "inherit"},
+            style: { fontFamily: "inherit" },
+          });
+        } else if (notification === "edited") {
+          toast.success("Empleado actulizado exitosamente", {
+            autoClose: 3000,
+            position: "bottom-right",
+            theme: "colored",
+            style: { fontFamily: "inherit" },
           });
         }
         sessionStorage.removeItem("notification");
@@ -64,12 +90,11 @@ const EmployeePage = () => {
   };
 
   const handleView = (employee: any) => {
-    console.log("Viewing:", employee);
     router.push(`/dashboard/employees/see_employee/${employee.id}`);
   };
 
-  const promptToDelete = (employee: any) => {
-    setEmployeeToDelete(employee);
+  const handleEdit = (employee: any) => {
+    router.push(`/dashboard/employees/edit_employee/${employee.id}`);
   };
 
   if (loading) return <p>Cargando...</p>;
@@ -82,6 +107,9 @@ const EmployeePage = () => {
     numero: number;
   }
 
+  const promptToDelete = (employee: any) => {
+    setEmployeeToDelete(employee);
+  };
   const sortByEmployeeName = (employees: Employee[]): Employee[] => {
     return employees
       .slice()
@@ -114,7 +142,7 @@ const EmployeePage = () => {
               </th>
               <th
                 className="text-white font-bold bg-[#15133B] border px-4 py-2"
-                colSpan={2}
+                colSpan={3}
               >
                 Acciones
               </th>
@@ -138,6 +166,11 @@ const EmployeePage = () => {
                 <td className="text-black bg-[#B0ADEA] border px-4 py-2">
                   <button onClick={() => handleView(employee)}>
                     <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
+                  </button>
+                </td>
+                <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <button onClick={() => handleEdit(employee)}>
+                    <PencilIcon className="h-5 w-5 text-blue-500 hover:text-blue-800" />
                   </button>
                 </td>
                 <td className="text-black bg-[#B0ADEA] border px-4 py-2">

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 const CardContainer = () => {
   const router = useRouter();
+  // ! Aniadir las otras rutas en base al desarrollo de las mismas
   return (
     <div className="flex flex-col h-[70%] w-[80%] border-black rounded-2xl px-10 shadow-2xl">
       <div className="flex h-[20%] items-center">
