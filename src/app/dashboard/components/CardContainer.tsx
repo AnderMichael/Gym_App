@@ -17,7 +17,7 @@ const CardContainer = () => {
         <Card title="Clientes" color="bg-[#1F1C53]" redirection={()=> router.push('dashboard/clients/')}/>
       </div>
       <div className="flex h-[40%] justify-center">
-        <Card title="Maquinaria" color="bg-[#4b5563]" />
+        <Card title="Maquinaria" color="bg-[#4b5563]" disabled={true}/>
       </div>
     </div>
   );
