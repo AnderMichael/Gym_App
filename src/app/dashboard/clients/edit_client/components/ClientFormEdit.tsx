@@ -1,41 +1,39 @@
 "use client";
-import Button from "@/components/Button";
 import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { toast } from "react-toastify";
+interface ClientFormProps {
+  clientData: any;
+}
 
-const styles = {
-  form: {
-    display: "flex",
-    flexDirection: "row", // Arrange elements side by side
-    alignItems: "center", // Align elements vertically in the center
-    gap: 2, // Add spacing between inputs
-  },
-};
-
-const ClientForm = () => {
+const ClientFormEdit = ({ clientData }: ClientFormProps) => {
   // ! Hooks para el form
   const router = useRouter(); // NOTE: Para redirigir paginas
+  const [isCancel, setIsCancel] = useState(true);
+
+  const [{ loading: updateLoading, error: updateError }, updateClient] =
+    useAxios(
+      {
+        method: "PATCH",
+        url: `http://localhost:3000/clients/${clientData.id}`,
+      },
+      { manual: true }
+    );
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm(); // NOTE: Para hacer validaciones en el formulario
 
-  const [, executePost] = useAxios(
-    {
-      url: "http://localhost:3000/clients",
-      method: "POST",
-    },
-    { manual: true }
-  );
+  if (updateLoading) return <div>Loading...</div>;
+  if (updateError) return <div>Error: {updateError.message}</div>;
 
   const onSubmitForm = async (data: any) => {
     if (isCancel) {
       try {
-        await executePost({
+        await updateClient({
           data: {
             clientFirstName: data.first_name,
             clientLastName: data.last_name,
@@ -47,15 +45,13 @@ const ClientForm = () => {
             payplan: data.pay_method,
           },
         });
-        router.replace("/dashboard/clients?added");
+        router.replace("/dashboard/clients?edited");
       } catch (error) {
         router.replace("/dashboard/clients?error");
         console.error("Hubo un error al enviar los datos:", error);
       }
     }
   };
-
-  const [isCancel, setIsCancel] = useState(true);
 
   const registration = () => {
     setIsCancel(true);
@@ -89,6 +85,7 @@ const ClientForm = () => {
                 minLength: 6,
                 maxLength: 50,
                 pattern: /^[A-Z][a-zA-Z\s]*$/,
+                value: clientData.clientFirstName,
               })}
             />
             {errors.first_name?.type === "required" && (
@@ -126,6 +123,7 @@ const ClientForm = () => {
                 minLength: 6,
                 maxLength: 50,
                 pattern: /^[A-Z][a-zA-Z\s]*$/,
+                value: clientData.clientLastName,
               })}
             />
             {errors.last_name?.type === "required" && (
@@ -161,6 +159,7 @@ const ClientForm = () => {
                 required: true,
                 pattern:
                   /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/,
+                value: clientData.borndate,
               })}
             />
             {errors.born_date?.type === "required" && (
@@ -183,9 +182,12 @@ const ClientForm = () => {
             </label>
             <input
               className="bg-white text-gray-800 rounded-lg text-center h-10"
-              placeholder="Dirección"
+              placeholder="Av. Siempre viva #231 Z. San Pedro"
               type="text"
-              {...register("direction", { required: true })}
+              {...register("direction", {
+                required: true,
+                value: clientData.direction,
+              })}
             />
             {errors.direction?.type === "required" && (
               <p className="text-red-700 font-light leading-relaxed">
@@ -204,6 +206,7 @@ const ClientForm = () => {
               {...register("email", {
                 required: true,
                 pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                value: clientData.email,
               })}
             />
             {errors.email?.type === "required" && (
@@ -228,6 +231,7 @@ const ClientForm = () => {
               {...register("contact", {
                 required: true,
                 pattern: /^[1-9][0-9]{7}$/,
+                value: clientData.cellphone,
               })}
             />
             {errors.contact?.type === "required" && (
@@ -256,6 +260,7 @@ const ClientForm = () => {
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="2023-08-13"
               type="text"
+              value={clientData.createdDate.substring(0, 10)}
               {...register("register_date", {
                 required: true,
                 pattern:
@@ -281,7 +286,7 @@ const ClientForm = () => {
             <select
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="Pago"
-              {...register("pay_method")}
+              {...register("pay_method", { value: clientData.payplan })}
             >
               <option value="Efectivo">Efectivo</option>
               <option value="Transferencia">Transferencia</option>
@@ -296,7 +301,7 @@ const ClientForm = () => {
             <select
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="Plan"
-              {...register("plan")}
+              {...register("plan", { value: clientData.planType })}
             >
               <option value="Diario">Diario</option>
               <option value="Mensual">Mensual</option>
@@ -320,4 +325,4 @@ const ClientForm = () => {
   );
 };
 
-export default ClientForm;
+export default ClientFormEdit;

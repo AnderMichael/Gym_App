@@ -1,20 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
-import { EyeIcon, PlusCircleIcon, TrashIcon } from "@heroicons/react/solid";
+import { EyeIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
-
-const styles = {
-  orangeButton: {
-    backgroundColor: "#DC6000",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "darkorange",
-    },
-  },
-};
+import { PencilAltIcon } from "@heroicons/react/outline";
 
 const ClientsPage = () => {
   const router = useRouter();
@@ -29,6 +20,17 @@ const ClientsPage = () => {
         `${window.location.pathname}${queryParams}`
       );
       sessionStorage.setItem("notification", "added");
+      router.back();
+      window.location.reload();
+    } else if (queryParams.has("edited")) {
+      queryParams.delete("edited");
+      window.history.replaceState(
+        {},
+        document.title,
+        `${window.location.pathname}${queryParams}`
+      );
+      sessionStorage.setItem("notification", "edited");
+      router.back();
       window.location.reload();
     } else {
       if (queryParams.has("error")) {
@@ -58,6 +60,13 @@ const ClientsPage = () => {
             theme: "colored",
             style: { fontFamily: "inherit" },
           });
+        } else if (notification === "edited") {
+          toast.success("Cliente actualizado exitosamente", {
+            autoClose: 3000,
+            position: "bottom-right",
+            theme: "colored",
+            style: { fontFamily: "inherit" },
+          });
         }
         sessionStorage.removeItem("notification");
       }
@@ -76,6 +85,10 @@ const ClientsPage = () => {
   const handleView = (client: any) => {
     console.log("Viewing:", client);
     router.push(`/dashboard/clients/see_client/${client.id}`);
+  };
+
+  const handleEdit = (client: any) => {
+    router.push(`/dashboard/clients/edit_client/${client.id}`);
   };
 
   const promptToDelete = (client: any) => {
@@ -119,16 +132,16 @@ const ClientsPage = () => {
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="bg-[#1F1C53] text-white font-bold font-jost text-2xl">
               <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-center">
                   Nombres
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-center">
                   Apellidos
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-center">
                   Fecha de registro
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-center">
                   Plan
                 </th>
                 <th colSpan={3} />
@@ -140,24 +153,29 @@ const ClientsPage = () => {
                   key={client.id}
                   className={client.id % 2 === 0 ? "bg-gray-100" : ""}
                 >
-                  <td className="text-black font-light bg-[#B0ADEA] border px-4 py-2">
+                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
                     {client.clientFirstName}
                   </td>
-                  <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
                     {client.clientLastName}
                   </td>
-                  <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
                     {client.createdDate.substring(0, 10)}
                   </td>
-                  <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
                     {client.planType}
                   </td>
-                  <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
                     <button onClick={() => handleView(client)}>
                       <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
                     </button>
                   </td>
-                  <td className="text-black bg-[#B0ADEA] border px-4 py-2">
+                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                    <button onClick={() => handleEdit(client)}>
+                      <PencilAltIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
+                    </button>
+                  </td>
+                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
                     <button onClick={() => promptToDelete(client)}>
                       <TrashIcon className="h-5 w-5 text-red-500 hover:text-red-700" />
                     </button>

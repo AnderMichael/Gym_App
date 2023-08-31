@@ -1,22 +1,28 @@
 "use client";
 
 import React from "react";
-import ClientForm from "../components/ClientForm";
 
 import { useRouter } from "next/navigation";
+import useAxios from "axios-hooks";
+import ClientFormEdit from "../components/ClientFormEdit";
 
-const styles = {
-  orangeButton: {
-    backgroundColor: "#DC6000",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "darkorange",
-    },
-  },
-};
+interface TokenProps {
+  params: {
+    id: string;
+  };
+  searchParams: string;
+}
 
-const addClient = () => {
+const addClient = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
+
+  const [{ data: clientData, loading, error }] = useAxios(
+    `http://localhost:3000/clients/${params.id}`
+  );
+
+  // Luego, maneja las condiciones
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   const handleBackToClients = () => {
     router.back();
@@ -26,7 +32,7 @@ const addClient = () => {
       <div className="flex flex-col p-4">
         <div className="flex justify-between px-10 mt-10">
           <h1 className="text-[#302E46] font-bold font-jost text-4xl ">
-            Nuevo Cliente
+            Editar Cliente
           </h1>
           <button
             onClick={handleBackToClients}
@@ -36,8 +42,8 @@ const addClient = () => {
             Volver a los clientes
           </button>
         </div>
-        <div className="flex-1 justify-between items-center">
-          <ClientForm />
+        <div className="flex-1 justify-center items-center">
+          <ClientFormEdit clientData={clientData}/>
         </div>
       </div>
     </>
