@@ -26,13 +26,7 @@ const EmployeeFormEdit = ({ employeeData }: EmployeeProfileProps) => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({
-    defaultValues: {
-      name: employeeData?.employeename,
-      charge: employeeData?.cargo,
-      contact: employeeData?.numero,
-    },
-  });
+  } = useForm();
 
   if (updateLoading) return <div>Loading...</div>;
   if (updateError) return <div>Error: {updateError.message}</div>;
