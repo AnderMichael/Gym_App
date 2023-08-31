@@ -6,6 +6,16 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+
+const styles ={
+  form: {
+    display: 'flex',
+    flexDirection: 'row',  // Arrange elements side by side
+    alignItems: 'center',  // Align elements vertically in the center
+    gap: 2,  // Add spacing between inputs
+  },
+};
+
 const ClientForm = () => {
   // ! Hooks para el form
   const router = useRouter(); // NOTE: Para redirigir paginas
@@ -54,14 +64,90 @@ const ClientForm = () => {
   };
 
   return (
-    <div className="flex bg-[#DC6000] p-10 rounded-md">
+    <div className="container mx-auto p-4 w-[75%] bg-[#FFFFFF] p-10 rounded-md">
+      <h1 className="text-[#302E46] font-bold font-jost text-4xl ">
+            Datos Personales
+      </h1>
       <form
-        className="flex flex-col space-y-4 md:space-y-6 w-[400px]"
+        style={{  display: 'flex', flexDirection: 'column', gap: '16px' }}
         onSubmit={handleSubmit(onSubmitForm)}
       >
-        <div className="flex flex-col">
-          <div className="mb-2 flex-col flex">
-            <label className="text-white">Nombre Completo</label>
+        <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
+            <label className="text-white">Nombres</label>
+            <input
+              className="bg-white text-gray-800 rounded-lg text-center h-10"
+              placeholder="Panquesito del Castillo Vainilla"
+              type="text"
+              {...register("name", {
+                required: true,
+                minLength: 6,
+                maxLength: 50,
+                pattern: /^[A-Z][a-zA-Z\s]*$/,
+              })}
+            />
+            {errors.name?.type === "required" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * Debes introducir un nombre
+              </p>
+            )}
+            {errors.name?.type === "minLength" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * El nombre debe ser tener 6 caracteres como mínimo
+              </p>
+            )}
+            {errors.name?.type === "maxLength" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * El nombre debe tener 50 caracteres como máximo
+              </p>
+            )}
+            {errors.name?.type === "pattern" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * Este no es un nombre válido, nombres con mayúsculas
+              </p>
+            )}
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
+            <label className="text-white">Nombres</label>
+            <input
+              className="bg-white text-gray-800 rounded-lg text-center h-10"
+              placeholder="Panquesito del Castillo Vainilla"
+              type="text"
+              {...register("name", {
+                required: true,
+                minLength: 6,
+                maxLength: 50,
+                pattern: /^[A-Z][a-zA-Z\s]*$/,
+              })}
+            />
+            {errors.name?.type === "required" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * Debes introducir un nombre
+              </p>
+            )}
+            {errors.name?.type === "minLength" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * El nombre debe ser tener 6 caracteres como mínimo
+              </p>
+            )}
+            {errors.name?.type === "maxLength" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * El nombre debe tener 50 caracteres como máximo
+              </p>
+            )}
+            {errors.name?.type === "pattern" && (
+              <p className=" text-red-700 font-light leading-relaxed">
+                * Este no es un nombre válido, nombres con mayúsculas
+              </p>
+            )}
+          </div>
+ 
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>         
+            <label className="text-white">Apellidos</label>
             <input
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="Panquesito del Castillo Vainilla"
@@ -95,9 +181,10 @@ const ClientForm = () => {
             )}
           </div>
         </div>
+
         <div className="flex flex-col">
           <div className="mb-2 flex flex-col">
-            <label className="text-white">Cargo</label>
+            <label className="text-white">Apellidos</label>
             <select
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="Cargo"

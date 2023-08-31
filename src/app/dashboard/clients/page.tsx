@@ -108,7 +108,7 @@ const ClientsPage = () => {
     <>
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center">
-          <h1 className="text-[#1F1C53] font-extrabold text-4xl ">Clientes</h1>
+          <h1 className="text-[#1F1C53] font-bold font-jost text-4xl ">Clientes</h1>
           
           <button onClick={handleAddClient} type="button" className="text-white bg-[#DC6000] hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">Añadir clientes</button>
         </div>
