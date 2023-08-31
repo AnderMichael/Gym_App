@@ -21,7 +21,7 @@ const addClient = ({ params, searchParams }: TokenProps) => {
   );
 
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   const handleBackToClients = () => {
@@ -32,7 +32,7 @@ const addClient = ({ params, searchParams }: TokenProps) => {
       <div className="flex flex-col p-4">
         <div className="flex justify-between px-10 mt-10">
           <h1 className="text-[#302E46] font-bold font-jost text-4xl ">
-            Editar Cliente
+            Ver Cliente
           </h1>
           <button
             onClick={handleBackToClients}

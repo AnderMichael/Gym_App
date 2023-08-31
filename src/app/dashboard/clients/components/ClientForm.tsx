@@ -86,9 +86,9 @@ const ClientForm = () => {
               type="text"
               {...register("first_name", {
                 required: true,
-                minLength: 6,
+                minLength: 5,
                 maxLength: 50,
-                pattern: /^[A-Z][a-zA-Z\s]*$/,
+                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
               })}
             />
             {errors.first_name?.type === "required" && (
@@ -98,7 +98,7 @@ const ClientForm = () => {
             )}
             {errors.first_name?.type === "minLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe tener 6 caracteres como mínimo
+                * El nombre debe tener 5 caracteres como mínimo
               </p>
             )}
             {errors.first_name?.type === "maxLength" && (
@@ -123,9 +123,9 @@ const ClientForm = () => {
               type="text"
               {...register("last_name", {
                 required: true,
-                minLength: 6,
+                minLength: 5,
                 maxLength: 50,
-                pattern: /^[A-Z][a-zA-Z\s]*$/,
+                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
               })}
             />
             {errors.last_name?.type === "required" && (
@@ -135,7 +135,7 @@ const ClientForm = () => {
             )}
             {errors.last_name?.type === "minLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El apellido debe tener 6 caracteres como mínimo
+                * El apellido debe tener 5 caracteres como mínimo
               </p>
             )}
             {errors.last_name?.type === "maxLength" && (

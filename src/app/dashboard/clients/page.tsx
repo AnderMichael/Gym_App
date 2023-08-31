@@ -125,7 +125,7 @@ const ClientsPage = () => {
             onClick={handleAddClient}
             className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
           >
-            Agregar Empleado
+            Agregar Cliente
           </button>
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -148,34 +148,34 @@ const ClientsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {sortedClientsData.map((client: any) => (
+              {sortedClientsData.map((client: any, index) => (
                 <tr
                   key={client.id}
-                  className={client.id % 2 === 0 ? "bg-gray-100" : ""}
+                  className={index % 2 === 0 ? " bg-[#B0ADEA]" : "bg-gray-100"}
                 >
-                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                  <td className="text-black text-center px-4 py-2">
                     {client.clientFirstName}
                   </td>
-                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                  <td className="text-black text-center px-4 py-2">
                     {client.clientLastName}
                   </td>
-                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                  <td className="text-black text-center px-4 py-2">
                     {client.createdDate.substring(0, 10)}
                   </td>
-                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                  <td className="text-black text-center px-4 py-2">
                     {client.planType}
                   </td>
-                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                  <td className="text-black text-center px-4 py-2">
                     <button onClick={() => handleView(client)}>
                       <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
                     </button>
                   </td>
-                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                  <td className="text-black text-center px-4 py-2">
                     <button onClick={() => handleEdit(client)}>
                       <PencilAltIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
                     </button>
                   </td>
-                  <td className="text-black text-center bg-[#B0ADEA]  px-4 py-2">
+                  <td className="text-black text-center px-4 py-2">
                     <button onClick={() => promptToDelete(client)}>
                       <TrashIcon className="h-5 w-5 text-red-500 hover:text-red-700" />
                     </button>
