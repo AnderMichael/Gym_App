@@ -76,37 +76,33 @@ const DeleteModal = ({ isOpen, onClose, client }: any) => {
             className="absolute top-0 left-0 w-full h-full bg-black opacity-50"
             onClick={onClose}
           ></div>
-          <div className="bg-[#1E1E1E] p-5 rounded-md z-10 text-white">
-            <h2 className="text-xl font-bold mb-4">Confirmar eliminación</h2>
-            <p className="font-semibold font-poppins">
-              ¿Estás seguro de borrar al siguiente usuario?
+          <div className="bg-[#f2f2f2] p-5 rounded-lg z-10 text-[#3D3C51]">
+            <p className="font-bold text-xl m-4">
+              ¿Estás seguro de borrar al siguiente cliente?
             </p>
-            <br />
-            <p>
-              <span className="font-bold font-poppins">Nombre:</span>{" "}
-              <span className="italic">{client?.clientFirstName}</span>
+            <p className="text-xl m-4">
+              <span className="font-bold">Nombre:</span>{" "}
+              <span className="">{client?.clientFirstName}</span>
             </p>
-            <p>
-              <span className="font-bold font-poppins">Plan:</span>{" "}
-              <span className="italic">{client?.planType}</span>
+            <p className="text-xl m-4">
+              <span className="font-bold">Plan:</span>{" "}
+              <span className="">{client?.planType}</span>
             </p>
-            <p>
-              <span className="font-bold font-poppins">
-                Fecha de cracion:
-              </span>{" "}
-              <span className="italic">{client?.createdDate}</span>
+            <p className="text-xl m-4">
+              <span className="font-bold">Fecha de cracion:</span>{" "}
+              <span className="">{client?.createdDate.substring(0, 10)}</span>
             </p>
 
             <div className="flex justify-end space-x-4 mt-5">
               <button
-                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md"
+                className="flex-1 px-4 py-2 bg-[#3A7E3D] text-white rounded-xl"
                 onClick={handleDelete}
               >
                 Sí, obviamente
               </button>
 
               <button
-                className="flex-1 px-4 py-2 bg-gray-300 text-black rounded-md"
+                className="flex-1 px-4 py-2 bg-[#CE0A0B] text-white rounded-xl"
                 onClick={onClose}
               >
                 No, me arrepentí

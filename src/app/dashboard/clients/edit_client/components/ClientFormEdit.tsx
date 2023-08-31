@@ -27,8 +27,8 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
     handleSubmit,
   } = useForm(); // NOTE: Para hacer validaciones en el formulario
 
-  if (updateLoading) return <div>Loading...</div>;
-  if (updateError) return <div>Error: {updateError.message}</div>;
+  if (updateLoading) return <div>Cargando...</div>;
+  if (updateError) return <div>Error al cargar pagina</div>;
 
   const onSubmitForm = async (data: any) => {
     if (isCancel) {
@@ -82,9 +82,9 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
               type="text"
               {...register("first_name", {
                 required: true,
-                minLength: 6,
+                minLength: 5,
                 maxLength: 50,
-                pattern: /^[A-Z][a-zA-Z\s]*$/,
+                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
                 value: clientData.clientFirstName,
               })}
             />
@@ -120,9 +120,9 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
               type="text"
               {...register("last_name", {
                 required: true,
-                minLength: 6,
+                minLength: 5,
                 maxLength: 50,
-                pattern: /^[A-Z][a-zA-Z\s]*$/,
+                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
                 value: clientData.clientLastName,
               })}
             />
@@ -133,7 +133,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
             )}
             {errors.last_name?.type === "minLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El apellido debe tener 6 caracteres como mínimo
+                * El apellido debe tener 5 caracteres como mínimo
               </p>
             )}
             {errors.last_name?.type === "maxLength" && (
@@ -316,7 +316,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
               className="flex-1 bg-[#1AC317] p-2 text-white rounded-xl hover:bg-[#246623] "
               onClick={registration}
             >
-              <h1 className="font-semibold">Registrar</h1>
+              <h1 className="font-semibold">Actualizar</h1>
             </button>
           </div>
         </div>

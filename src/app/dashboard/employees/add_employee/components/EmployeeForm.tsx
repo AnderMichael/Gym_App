@@ -69,9 +69,9 @@ const EmployeeForm = () => {
               type="text"
               {...register("name", {
                 required: true,
-                minLength: 6,
+                minLength: 5,
                 maxLength: 50,
-                pattern: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,
+                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
               })}
             />
             {errors.name?.type === "required" && (
@@ -81,7 +81,7 @@ const EmployeeForm = () => {
             )}
             {errors.name?.type === "minLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe ser tener 6 caracteres como mínimo
+                * El nombre debe tener 5 caracteres como mínimo
               </p>
             )}
             {errors.name?.type === "maxLength" && (
