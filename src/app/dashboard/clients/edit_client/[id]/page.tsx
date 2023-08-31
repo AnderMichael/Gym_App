@@ -21,8 +21,8 @@ const addClient = ({ params, searchParams }: TokenProps) => {
   );
 
   // Luego, maneja las condiciones
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <div>Cargando...</div>;
+  if (error) return <div>Error al cargar la página</div>;
 
   const handleBackToClients = () => {
     router.back();

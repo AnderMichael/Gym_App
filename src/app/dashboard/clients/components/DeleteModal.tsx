@@ -81,15 +81,15 @@ const DeleteModal = ({ isOpen, onClose, client }: any) => {
               ¿Estás seguro de borrar al siguiente cliente?
             </p>
             <p className="text-xl m-4">
-              <span className="font-bold">Nombre:</span>{" "}
-              <span className="">{client?.clientFirstName}</span>
+              <span className="font-bold">Nombre Completo:</span>{" "}
+              <span className="">{client?.clientFirstName + " " + client?.clientLastName}</span>
             </p>
             <p className="text-xl m-4">
               <span className="font-bold">Plan:</span>{" "}
               <span className="">{client?.planType}</span>
             </p>
             <p className="text-xl m-4">
-              <span className="font-bold">Fecha de cracion:</span>{" "}
+              <span className="font-bold">Fecha de registro:</span>{" "}
               <span className="">{client?.createdDate.substring(0, 10)}</span>
             </p>
 
