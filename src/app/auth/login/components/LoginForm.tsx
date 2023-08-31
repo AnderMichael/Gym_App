@@ -22,27 +22,28 @@ const LoginForm = () => {
       data.email === "panque.sito@hotcake.com" &&
       data.password === "ChantilinConHelado"
     ) {
-      router.push("/dashboard/employees");
+      router.push("/dashboard");
       login();
     } else {
       setIncorrect(true);
     }
-    console.log(isLogged);
   };
 
   return (
-    <div className="flex bg-black p-10 rounded-md">
+    <div className="flex bg-white p-10 rounded-lg">
       <form
         className="flex flex-col space-y-4 md:space-y-6 h-[50%] w-[270px]"
         onSubmit={handleSubmit(checkUser)}
       >
         <div className="flex flex-1 flex-col">
           <div className="mb-2 block">
-            <label className="text-white">Email</label>
+            <label className="text-[#302E46] font-semibold text-xl font-jost">
+              Correo Electrónico
+            </label>
           </div>
           <input
-            className="flex-1 bg-white text-gray-800 rounded-lg"
-            placeholder="name@email.com"
+            className="flex-1 bg-white text-gray-800 rounded-lg font-josefin font-light"
+            placeholder="usuario@email.com"
             type="text"
             {...register("email", {
               required: true,
@@ -50,39 +51,46 @@ const LoginForm = () => {
             })}
           />
           {errors.email?.type === "required" && (
-            <p className="text-red-700 mt-3">* You need to type an Email</p>
+            <p className="text-red-700 mt-2 font-normal font-jost">
+              * Debes introducir un correo
+            </p>
           )}
           {errors.email?.type === "pattern" && (
-            <p className="text-red-700 mt-3">* Type a valid Email</p>
+            <p className="text-red-700 mt-2 font-normal font-jost">
+              * Introduce un correo válido
+            </p>
           )}
         </div>
         <div className="flex flex-1 flex-col">
           <div className="mb-2 block">
-            <label className="text-white">Password</label>
+            <label className="text-[#302E46] font-semibold font-jost text-xl">
+              Contraseña
+            </label>
           </div>
           <input
-            className="flex-1 bg-white text-gray-800 rounded-lg"
+            className="flex-1 bg-white text-gray-800 rounded-lg font-josefin"
             placeholder="°°°°°°°°"
             type="password"
             {...register("password", { required: true, minLength: 8 })}
           />
           {errors.password?.type === "required" && (
-            <p className="text-red-700 mt-3 font-light leading-relaxed">
-              * You need to type a Password
+            <p className="text-red-700 mt-2 font-normal leading-relaxed font-jost ">
+              * Debes introducir una contraseña
             </p>
           )}
           {errors.password?.type === "minLength" && (
-            <p className="text-red-700 mt-3 font-light leading-relaxed">
-              * A password has at least 8 characters
+            <p className="text-red-700 mt-2 font-normal leading-relaxed font-jost">
+              * Una contraseña debe tener al menos 8 caracteres
             </p>
           )}
         </div>
         {incorrect && (
-          <p className="text-red-700 mt-3 font-light leading-relaxed">
-            * Email and Password Incorrect, rewrite all and try again!
+          <p className="text-red-700 mt-2 font-normal leading-relaxed font-jost">
+            * El correo y la contraseña son incorrectos, introdúcelos de nuevo
           </p>
         )}
-        <Button title="Sign in" />
+        <Button title="Ingresar" color="#EA9553" hover="#DC6000" />
+        
       </form>
     </div>
   );

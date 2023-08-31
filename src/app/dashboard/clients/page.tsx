@@ -1,14 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
-import { EyeIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
+import { EyeIcon, TrashIcon, PencilAltIcon } from "@heroicons/react/outline";
 
-const EmployeePage = () => {
+const ClientsPage = () => {
   const router = useRouter();
-  const [employeeToDelete, setEmployeeToDelete] = useState(null);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -40,34 +39,28 @@ const EmployeePage = () => {
           document.title,
           `${window.location.pathname}${queryParams}`
         );
-        router.back();
-        toast.error("Hubo un error en el proceso", {
-          autoClose: 3000,
-          position: "bottom-right",
-          theme: "colored",
-          style: { fontFamily: "inherit" },
-        });
+        toast.error("Cliente no añadido", { autoClose: 3000 });
       }
     }
     window.onload = () => {
       let notification = sessionStorage.getItem("notification");
       if (notification != null) {
         if (notification === "added") {
-          toast.success("Empleado agregado exitosamente", {
+          toast.success("Cliente agregado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
             style: { fontFamily: "inherit" },
           });
         } else if (notification === "deleted") {
-          toast.success("Empleado eliminado exitosamente", {
+          toast.success("Cliente eliminado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
             style: { fontFamily: "inherit" },
           });
         } else if (notification === "edited") {
-          toast.success("Empleado actulizado exitosamente", {
+          toast.success("Cliente actualizado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
@@ -79,42 +72,46 @@ const EmployeePage = () => {
     };
   }, []);
 
-  const [{ data: employeesData, loading, error }, refetch] = useAxios(
-    "http://localhost:3000/employee"
+  const [{ data: clientData, loading, error }, refetch] = useAxios(
+    "http://localhost:3000/clients"
   );
+  const [clientToDelete, setClientToDelete] = useState(null);
 
-  const handleAddEmployee = () => {
-    router.push("/dashboard/employees/add_employee");
+  const handleAddClient = () => {
+    router.push("/dashboard/clients/add_client");
   };
 
-  const handleView = (employee: any) => {
-    router.push(`/dashboard/employees/see_employee/${employee.id}`);
+  const handleView = (client: any) => {
+    console.log("Viewing:", client);
+    router.push(`/dashboard/clients/see_client/${client.id}`);
   };
 
-  const handleEdit = (employee: any) => {
-    router.push(`/dashboard/employees/edit_employee/${employee.id}`);
+  const handleEdit = (client: any) => {
+    router.push(`/dashboard/clients/edit_client/${client.id}`);
+  };
+
+  const promptToDelete = (client: any) => {
+    setClientToDelete(client);
   };
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error al cargar los datos.</p>;
 
-  interface Employee {
+  interface Client {
     id: number;
-    employeename: string;
-    cargo: string;
-    numero: number;
+    clientFirstName: string;
+    clientLastName: string;
+    createdDate: string;
+    planType: string;
   }
 
-  const promptToDelete = (employee: any) => {
-    setEmployeeToDelete(employee);
-  };
-  const sortByEmployeeName = (employees: Employee[]): Employee[] => {
-    return employees
+  const sortByClientName = (clients: Client[]): Client[] => {
+    return clients
       .slice()
-      .sort((a, b) => a.employeename.localeCompare(b.employeename));
+      .sort((a, b) => a.clientFirstName.localeCompare(b.clientFirstName));
   };
 
-  const sortedEmployeesData = sortByEmployeeName(employeesData);
+  const sortedClientsData = sortByClientName(clientData);
 
   return (
     <>
@@ -138,53 +135,65 @@ const EmployeePage = () => {
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center m-5">
           <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
-            Empleados
+            Clientes
           </h1>
           <button
-            onClick={handleAddEmployee}
+            onClick={handleAddClient}
             className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
           >
-            Agregar Empleado
+            Agregar Cliente
           </button>
         </div>
-        <div className="overflow-x-auto mb-4 rounded-xl shadow-lg shadow-[#C0C0C0]">
-          <table className="w-full table-auto">
-            <thead className="bg-[#DC6000] text-white font-bold font-jost text-2xl">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="bg-[#1F1C53] text-white font-bold font-jost text-2xl">
               <tr>
-                <th className="p-4"> Nombre Completo </th>
-                <th className="p-4"> Cargo </th>
-                <th className="p-4"> Número de Contacto </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Nombres
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Apellidos
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Fecha de registro
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Plan
+                </th>
                 <th colSpan={3} />
               </tr>
             </thead>
             <tbody>
-              {sortedEmployeesData.map((employee: any, index: number) => (
+              {sortedClientsData.map((client: any, index) => (
                 <tr
-                  key={employee.id}
-                  className={
-                    index % 2 === 0
-                      ? "bg-[#FBEFE6] text-center font-normal font-jost"
-                      : "bg-white text-center font-normal font-jost"
-                  }
+                  key={client.id}
+                  className={index % 2 === 0 ? " bg-[#DDDDE5]" : "bg-gray-100"}
                 >
-                  <td className="text-black px-4 py-2">
-                    {employee.employeename}
+                  <td className="text-black text-center px-4 py-2">
+                    {client.clientFirstName}
                   </td>
-                  <td className="text-black px-4 py-2">{employee.cargo}</td>
-                  <td className="text-black px-4 py-2">{employee.numero}</td>
-                  <td className="text-black px-4 py-2">
-                    <button onClick={() => handleView(employee)}>
-                      <EyeIcon className="h-7 w-10 border-spacing-1 text-[#223A6B] hover:text-[#5769a5]" />
+                  <td className="text-black text-center px-4 py-2">
+                    {client.clientLastName}
+                  </td>
+                  <td className="text-black text-center px-4 py-2">
+                    {client.createdDate.substring(0, 10)}
+                  </td>
+                  <td className="text-black text-center px-4 py-2">
+                    {client.planType}
+                  </td>
+                  <td className="text-black text-center px-4 py-2">
+                    <button onClick={() => handleView(client)}>
+                      <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
                     </button>
                   </td>
-                  <td className="text-black   px-4 py-2">
-                    <button onClick={() => handleEdit(employee)}>
-                      <PencilAltIcon className="h-7 w-7 text-[#1A4E1C] hover:text-[#447646]" />
+                  <td className="text-black text-center px-4 py-2">
+                    <button onClick={() => handleEdit(client)}>
+                      <PencilAltIcon className="h-5 w-5 text-[#1A4E1C] hover:text-[#173518]" />
                     </button>
                   </td>
-                  <td className="text-black   px-4 py-2">
-                    <button onClick={() => promptToDelete(employee)}>
-                      <TrashIcon className="h-7 w-7 text-[#CE0A0B] hover:text-[#e92626] font-thin" />
+                  <td className="text-black text-center px-4 py-2">
+                    <button onClick={() => promptToDelete(client)}>
+                      <TrashIcon className="h-5 w-5 text-red-500 hover:text-red-700" />
                     </button>
                   </td>
                 </tr>
@@ -194,12 +203,12 @@ const EmployeePage = () => {
         </div>
       </div>
       <DeleteModal
-        isOpen={!!employeeToDelete}
-        onClose={() => setEmployeeToDelete(null)}
-        employee={employeeToDelete}
+        isOpen={!!clientToDelete}
+        onClose={() => setClientToDelete(null)}
+        client={clientToDelete}
       />
     </>
   );
 };
 
-export default EmployeePage;
+export default ClientsPage;

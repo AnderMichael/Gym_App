@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import useAxios from "axios-hooks";
 import { toast } from "react-toastify";
 
-const DeleteModal = ({ isOpen, onClose, employee }: any) => {
+const DeleteModal = ({ isOpen, onClose, client }: any) => {
   const [, execute] = useAxios(
-    { url: `http://localhost:3000/employee/${employee?.id}`, method: "DELETE" },
+    { url: `http://localhost:3000/clients/${client?.id}`, method: "DELETE" },
     { manual: true }
   );
 
@@ -19,7 +19,7 @@ const DeleteModal = ({ isOpen, onClose, employee }: any) => {
       sessionStorage.setItem("notification", "deleted");
       window.location.reload();
     } catch (error) {
-      console.error("Error al eliminar el empleado:", error);
+      console.error("Error al eliminar cliente:", error);
     }
   };
 
@@ -71,32 +71,29 @@ const DeleteModal = ({ isOpen, onClose, employee }: any) => {
           </button>
         </div>
       ) : (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 font-jost">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
           <div
             className="absolute top-0 left-0 w-full h-full bg-black opacity-50"
             onClick={onClose}
           ></div>
           <div className="bg-[#f2f2f2] p-5 rounded-lg z-10 text-[#3D3C51]">
             <p className="font-bold text-xl m-4">
-              ¿Está seguro de eliminar al siguiente empleado?
-            </p>
-            
-            <p className="text-xl m-4">
-              <span className="font-bold">Nombre:</span>{" "}
-              <span className="">{employee?.employeename}</span>
+              ¿Estás seguro de borrar al siguiente cliente?
             </p>
             <p className="text-xl m-4">
-              <span className="font-bold ">Cargo:</span>{" "}
-              <span className="">{employee?.cargo}</span>
+              <span className="font-bold">Nombre Completo:</span>{" "}
+              <span className="">{client?.clientFirstName + " " + client?.clientLastName}</span>
             </p>
             <p className="text-xl m-4">
-              <span className="font-bold">
-                Numero de Contacto:
-              </span>{" "}
-              <span className="">{employee?.numero}</span>
+              <span className="font-bold">Plan:</span>{" "}
+              <span className="">{client?.planType}</span>
+            </p>
+            <p className="text-xl m-4">
+              <span className="font-bold">Fecha de registro:</span>{" "}
+              <span className="">{client?.createdDate.substring(0, 10)}</span>
             </p>
 
-            <div className="flex justify-end space-x-4 mt-5 font-bold">
+            <div className="flex justify-end space-x-4 mt-5">
               <button
                 className="flex-1 px-4 py-2 bg-[#3A7E3D] text-white rounded-xl"
                 onClick={handleDelete}
