@@ -23,8 +23,8 @@ const addClient = () => {
   };
   return (
     <>
-      <div className="flex flex-col p-4">
-        <div className="flex justify-between px-10 mt-10">
+      <div className="flex flex-col p-4 justify-center items-center">
+        <div className="flex justify-between w-[75%] my-7">
           <h1 className="text-[#302E46] font-bold font-jost text-4xl ">
             Nuevo Cliente
           </h1>
@@ -36,9 +36,7 @@ const addClient = () => {
             Volver a Clientes
           </button>
         </div>
-        <div className="flex-1 justify-between items-center">
-          <ClientForm />
-        </div>
+        <ClientForm />
       </div>
     </>
   );
