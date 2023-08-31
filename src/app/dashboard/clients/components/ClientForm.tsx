@@ -157,7 +157,7 @@ const ClientForm = () => {
             <input
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="2023-08-13"
-              type="text"
+              type="date"
               {...register("born_date", {
                 required: true,
                 pattern:
@@ -256,7 +256,7 @@ const ClientForm = () => {
             <input
               className="bg-white text-gray-800 rounded-lg text-center h-10"
               placeholder="2023-08-13"
-              type="text"
+              type="date"
               {...register("register_date", {
                 required: true,
                 pattern:

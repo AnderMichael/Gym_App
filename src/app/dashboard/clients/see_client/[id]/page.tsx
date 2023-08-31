@@ -20,7 +20,6 @@ const addClient = ({ params, searchParams }: TokenProps) => {
     `http://localhost:3000/clients/${params.id}`
   );
 
-
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -29,8 +28,8 @@ const addClient = ({ params, searchParams }: TokenProps) => {
   };
   return (
     <>
-      <div className="flex flex-col p-4">
-        <div className="flex justify-between px-10 mt-10">
+      <div className="flex flex-col  justify-center items-center p-4">
+        <div className="flex justify-between w-[75%] my-7">
           <h1 className="text-[#302E46] font-bold font-jost text-4xl ">
             Ver Cliente
           </h1>
@@ -42,9 +41,7 @@ const addClient = ({ params, searchParams }: TokenProps) => {
             Volver a Clientes
           </button>
         </div>
-        <div className="flex-1 justify-center items-center">
-          <ClientFormShow clientData={clientData}/>
-        </div>
+        <ClientFormShow clientData={clientData} />
       </div>
     </>
   );

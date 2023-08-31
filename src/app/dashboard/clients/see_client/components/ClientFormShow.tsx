@@ -11,9 +11,6 @@ interface ClientFormProps {
 const ClientFormEdit = ({ clientData }: ClientFormProps) => {
     const router = useRouter();
 
-    const cancellation = () => {
-        router.back();
-    };
 
     return (
         <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md">
@@ -107,16 +104,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
                     </div>
                 </div>
 
-                <div className="flex justify-between">
-                    <div className="flex flex-1 mx-1">
-                        <button
-                            className="flex-1 bg-[#1AC317] p-2 text-white rounded-xl hover:bg-[#246623] "
-                            onClick={cancellation}
-                        >
-                            <h1 className="font-semibold">Volver</h1>
-                        </button>
-                    </div>
-                </div>
+              
             </form>
         </div>
     );
