@@ -89,6 +89,7 @@ const ClientForm = () => {
                 minLength: 5,
                 maxLength: 50,
                 pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
+      
               })}
             />
             {errors.first_name?.type === "required" && (

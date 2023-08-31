@@ -33,7 +33,7 @@ const addClient = () => {
             type="button"
             className="text-white bg-[#DC6000] hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-bold font-jost rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
           >
-            Volver a los clientes
+            Volver a Clientes
           </button>
         </div>
         <div className="flex-1 justify-between items-center">
