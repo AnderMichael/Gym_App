@@ -1,11 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
-import { EyeIcon, TrashIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
-import { PencilAltIcon } from "@heroicons/react/outline";
+import {EyeIcon, TrashIcon, PencilAltIcon } from "@heroicons/react/outline";
 
 const ClientsPage = () => {
   const router = useRouter();
@@ -151,7 +150,7 @@ const ClientsPage = () => {
               {sortedClientsData.map((client: any, index) => (
                 <tr
                   key={client.id}
-                  className={index % 2 === 0 ? " bg-[#B0ADEA]" : "bg-gray-100"}
+                  className={index % 2 === 0 ? " bg-[#DDDDE5]" : "bg-gray-100"}
                 >
                   <td className="text-black text-center px-4 py-2">
                     {client.clientFirstName}
@@ -172,7 +171,7 @@ const ClientsPage = () => {
                   </td>
                   <td className="text-black text-center px-4 py-2">
                     <button onClick={() => handleEdit(client)}>
-                      <PencilAltIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
+                      <PencilAltIcon className="h-5 w-5 text-[#1A4E1C] hover:text-[#173518]" />
                     </button>
                   </td>
                   <td className="text-black text-center px-4 py-2">
