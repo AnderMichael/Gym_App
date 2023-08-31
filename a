@@ -1,0 +1,80 @@
+*   54fa105	 (qa) Merge branch 'develop' into qa
+[31m|[m[32m\[m  
+[31m|[m *   bcbdc0d	 (HEAD -> redesign, upstream/develop, develop) Merge branch 'develop' of https://github.com/AnderMichael/Gym_App into develop
+[31m|[m [33m|[m[34m\[m  
+[31m|[m * [34m\[m   6ffae91	 Merge branch 'notifications' into develop
+[31m|[m [35m|[m[36m\[m [34m\[m  
+* [35m|[m [36m|[m [34m|[m c544ea4	 .
+* [35m|[m [36m|[m [34m|[m   4f52e2c	 Merge branch 'develop' into qa
+[1;31m|[m[34m\[m [35m\[m [36m\[m [34m\[m  
+[1;31m|[m [34m|[m [35m|[m[34m_[m[36m|[m[34m/[m  
+[1;31m|[m [34m|[m[34m/[m[35m|[m [36m|[m   
+[1;31m|[m * [35m|[m [36m|[m   8d0001f	 Merge branch 'notifications' into develop
+[1;31m|[m [35m|[m[36m\[m [35m\[m [36m\[m  
+[1;31m|[m [35m|[m [36m|[m[35m/[m [36m/[m  
+[1;31m|[m [35m|[m[35m/[m[36m|[m [36m/[m   
+[1;31m|[m [35m|[m [36m|[m[36m/[m    
+[1;31m|[m [35m|[m * 8661f90	 style(final styling): Toast functional!
+[1;31m|[m [35m|[m * 7413cfe	 style(Notifications Added): Session Storage implemented and redirections fixed.
+[1;31m|[m [35m|[m * 4a42ccd	 Toastify installation
+[1;31m|[m [35m|[m[35m/[m  
+[1;31m|[m * 1b9a4e1	 fix(Add employee form labels and sort names in table): Correcting the errors in description of typing in forms and presentation of table
+[1;31m|[m *   8f488ac	 Merge branch 'addLocalStorage' into develop
+[1;31m|[m [1;35m|[m[1;36m\[m  
+[1;31m|[m [1;35m|[m * cd3fd87	 (upstream/addLocalStorage) Fix reload after add employee
+[1;31m|[m [1;35m|[m * e47c810	 urla params idea
+[1;31m|[m [1;35m|[m * ccb036c	 Fix classNames
+[1;31m|[m [1;35m|[m * 7fd67cc	 Fix reload register
+[1;31m|[m [1;35m|[m * 8dd63f8	 Fix register reload
+[1;31m|[m [1;35m|[m * 02c050e	 Add local storage
+[1;31m|[m [1;35m|[m[1;35m/[m  
+[1;31m|[m *   ca14f92	 Merge branch 'spanishPage' into develop
+[1;31m|[m [31m|[m[32m\[m  
+[1;31m|[m [31m|[m * dcedeb7	 fix(Name validation): Names starting with Capital Letters
+[1;31m|[m [31m|[m * 7c391b9	 fix(spanish traduction forms and validations): Add a new simple regular expression, some traductions more...
+[1;31m|[m [31m|[m * 32f3dea	 fix(spanish traduction forms and validations): Adding regular expression to evaluate cellphone numbers and all the texts of page are in Spanish right now.
+[1;31m|[m [31m|[m[31m/[m  
+* [31m|[m edfd72e	 (origin/stage, stage) Merge branch 'develop' into QA
+[33m|[m[31m\[m[31m|[m 
+[33m|[m [31m|[m *   5c78ae8	 (upstream/stage) Merge branch 'QAremote' into stage
+[33m|[m [31m|[m [35m|[m[36m\[m  
+[33m|[m [31m|[m [35m|[m * bf9aa0c	 Merge branch 'QA' into QAremote
+[33m|[m [31m|[m[33m_[m[35m|[m[33m/[m[1;32m|[m 
+[33m|[m[33m/[m[31m|[m [35m|[m [1;32m|[m 
+[33m|[m [31m|[m * [1;32m|[m 045abb1	 Merge branch 'QA' into stage
+[33m|[m [31m|[m[33m/[m[1;32m|[m [1;32m|[m 
+[33m|[m[33m/[m[31m|[m [1;32m|[m[1;32m/[m  
+[33m|[m [31m|[m * 392c2e5	 (upstream/QA) Merge branch 'develop' into QA
+[33m|[m [31m|[m[33m/[m[31m|[m 
+[33m|[m[33m/[m[31m|[m[31m/[m  
+[33m|[m * cb09184	 (origin/develop) Merge branch 'final_styling_mvp_1' into develop
+[33m|[m[33m/[m[32m|[m 
+[33m|[m * c402165	 style(Fonts and tables)
+[33m|[m[33m/[m  
+* 5f192a8	 (origin/QA) style(table color): In order to visualizae in a good way the data from backend
+*   7408034	 Merge branch 'develop' of https://github.com/AnderMichael/Gym_App into develop
+[33m|[m[34m\[m  
+[33m|[m * dc0da09	 (upstream/feat-crud-employees, origin/feat-crud-employees) add create, read and delete
+* [34m|[m   41b98af	 Merge branch 'login' into develop
+[35m|[m[36m\[m [34m\[m  
+[35m|[m * [34m|[m 087ab16	 Merge branches 'login' and 'login' of https://github.com/AnderMichael/Gym_App into login
+[35m|[m [1;31m|[m[34m\[m[34m|[m 
+[35m|[m [1;31m|[m * 95176e9	 (upstream/login, origin/login) add conection to backend
+[35m|[m * [1;32m|[m 1a0363f	 style(employees table)
+[35m|[m [1;32m|[m[1;32m/[m  
+[35m|[m * ff2947e	 feat(employees and login): Employee registration screen and form, in the same way see Employees
+[35m|[m * c7f3e9f	 add employees table
+[35m|[m * 9af3b6d	 fix guard and login
+[35m|[m * 58566d6	 fix(unprotected pages): A partially correction of routing, reload to login page
+[35m|[m * 033d18e	 fix (alert dialogs): Instead of alert dialog there is a red text which indicates 'Incorrect Email and Password, rewrite all and try again'
+[35m|[m * f224f74	 feat(login form): A responsive for validation of emails and passwords of min 8 characters
+[35m|[m * 48872fd	 feat(Login Page): First Screen Arranged
+[35m|[m[35m/[m  
+[35m|[m * 368d8fa	 (upstream/emploPage, origin/emploPage) Employees page template
+[35m|[m[35m/[m  
+[35m|[m * aa5aec9	 (upstream/employees, origin/employees) Add branch, and table component
+[35m|[m * 5e0ed0c	 Add branch, and table component
+[35m|[m[35m/[m  
+* 2136367	 (upstream/main, upstream/HEAD, origin/main, main) Update README.md
+* 8e63f4f	 EmptyProject
+* 8859cae	 Initial commit from Create Next App
