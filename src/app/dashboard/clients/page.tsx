@@ -95,7 +95,7 @@ const ClientsPage = () => {
   };
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error al cargar los datos.</p>;
+  if (error) return router.push("/dashboard/errorPage");
 
   interface Client {
     id: number;
