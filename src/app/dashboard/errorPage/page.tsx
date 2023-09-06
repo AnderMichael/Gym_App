@@ -9,9 +9,6 @@ const ErrorPage = () => {
         router.back();
       };
 
-
-
-
   return (
     <div className="flex flex-col inset-0 justify-center items-center absolute font-jost bg-[#F2F2F2]">
         <Image src={sadMichi} alt={":c"}/>
