@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface PasswordInputProps {
-  register: any; // You can type this more specifically if needed
-  errors: any;   // You can type this more specifically if needed
+  register: any;
+  errors: any;
 }
 
 const PasswordInput: React.FC<PasswordInputProps> = ({ register, errors }) => {
