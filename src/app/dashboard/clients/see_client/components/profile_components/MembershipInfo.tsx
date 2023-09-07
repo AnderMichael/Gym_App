@@ -11,7 +11,7 @@ interface MembershipInfoProps {
 
 const MembershipInfo: React.FC<MembershipInfoProps> = ({ clientData }) => {
   return (
-    <div>
+    <div className="space-y-4 md:space-y-6">
       <TitleProfile title="Membresía"/>
       <div className="flex justify-center mt-2">
         <div className="mb-2 flex-col flex flex-1 mr-3">

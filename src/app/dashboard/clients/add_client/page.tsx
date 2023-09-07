@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import ClientForm from "../components/ClientForm";
+import ClientForm from "./components/ClientForm";
 
 import { useRouter } from "next/navigation";
 
-const addClient = () => {
+const AddClient = () => {
   const router = useRouter();
 
   const handleBackToClients = () => {
@@ -32,4 +32,4 @@ const addClient = () => {
   );
 };
 
-export default addClient;
+export default AddClient;
