@@ -4,7 +4,7 @@ import React from "react";
 
 import { useRouter } from "next/navigation";
 import useAxios from "axios-hooks";
-import ClientFormShow from "../components/ClientFormShow";
+import ClientProfile from "../components/ClientProfile";
 
 interface TokenProps {
   params: {
@@ -41,7 +41,7 @@ const addClient = ({ params, searchParams }: TokenProps) => {
             Volver a Clientes
           </button>
         </div>
-        <ClientFormShow clientData={clientData} />
+        <ClientProfile clientData={clientData} />
       </div>
     </>
   );

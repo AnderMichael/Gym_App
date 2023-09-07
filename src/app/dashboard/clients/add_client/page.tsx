@@ -1,21 +1,11 @@
 "use client";
 
 import React from "react";
-import ClientForm from "../components/ClientForm";
+import ClientForm from "./components/ClientForm";
 
 import { useRouter } from "next/navigation";
 
-const styles = {
-  orangeButton: {
-    backgroundColor: "#DC6000",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "darkorange",
-    },
-  },
-};
-
-const addClient = () => {
+const AddClient = () => {
   const router = useRouter();
 
   const handleBackToClients = () => {
@@ -42,4 +32,4 @@ const addClient = () => {
   );
 };
 
-export default addClient;
+export default AddClient;
