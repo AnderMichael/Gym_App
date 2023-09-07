@@ -5,16 +5,6 @@ import ClientForm from "../components/ClientForm";
 
 import { useRouter } from "next/navigation";
 
-const styles = {
-  orangeButton: {
-    backgroundColor: "#DC6000",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "darkorange",
-    },
-  },
-};
-
 const addClient = () => {
   const router = useRouter();
 
