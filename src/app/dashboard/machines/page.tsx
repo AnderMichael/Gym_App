@@ -1,13 +1,15 @@
 "use client";
+import { EyeIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import React, { useState, useEffect } from "react";
-import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
+import useAxios from "axios-hooks";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
-import { EyeIcon, TrashIcon, PencilAltIcon } from "@heroicons/react/outline";
 
-const ClientsPage = () => {
-  const router = useRouter();
+
+
+const MachinesPage=()=>{
+    const router = useRouter();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -77,17 +79,17 @@ const ClientsPage = () => {
   );
   const [clientToDelete, setClientToDelete] = useState(null);
 
-  const handleAddClient = () => {
-    router.push("/dashboard/clients/add_client");
+  const handleAddMachine = () => {
+    router.push("/dashboard/machines/addMachine");
   };
 
   const handleView = (client: any) => {
     console.log("Viewing:", client);
-    router.push(`/dashboard/clients/see_client/${client.id}`);
+    router.push(`/dashboard/machines/seeMachine/${client.id}`);
   };
 
   const handleEdit = (client: any) => {
-    router.push(`/dashboard/clients/edit_client/${client.id}`);
+    router.push(`/dashboard/machines/editMachine/${client.id}`);
   };
 
   const promptToDelete = (client: any) => {
@@ -145,13 +147,13 @@ const ClientsPage = () => {
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center m-5">
           <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
-            Clientes
+            Máquinas
           </h1>
           <button
-            onClick={handleAddClient}
+            onClick={handleAddMachine}
             className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
           >
-            Agregar Cliente
+            Agregar Máquina
           </button>
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -219,6 +221,7 @@ const ClientsPage = () => {
       />
     </>
   );
-};
 
-export default ClientsPage;
+
+};
+export default MachinesPage;

@@ -70,7 +70,6 @@ const EmployeeForm = () => {
           <div className="flex flex-1 mx-1">
             <Button
               color="bg-[#3A7E3D]"
-              hover="bg-[#246623]"
               title="Registrar"
               onClick={registration}
             />
@@ -78,7 +77,6 @@ const EmployeeForm = () => {
           <div className="flex flex-1 mx-1">
             <Button
               color="bg-[#CE0A0B]"
-              hover="bg-[#782828]"
               title="Cancelar"
               onClick={cancellation}
             />
