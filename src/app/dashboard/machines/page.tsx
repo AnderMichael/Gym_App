@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import useAxios from "axios-hooks";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
+import { machine } from "os";
 
 
 
@@ -41,28 +42,28 @@ const MachinesPage=()=>{
           document.title,
           `${window.location.pathname}${queryParams}`
         );
-        toast.error("Cliente no añadido", { autoClose: 3000 });
+        toast.error("machinee no añadido", { autoClose: 3000 });
       }
     }
     window.onload = () => {
       let notification = sessionStorage.getItem("notification");
       if (notification != null) {
         if (notification === "added") {
-          toast.success("Cliente agregado exitosamente", {
+          toast.success("machinee agregado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
             style: { fontFamily: "inherit" },
           });
         } else if (notification === "deleted") {
-          toast.success("Cliente eliminado exitosamente", {
+          toast.success("machinee eliminado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
             style: { fontFamily: "inherit" },
           });
         } else if (notification === "edited") {
-          toast.success("Cliente actualizado exitosamente", {
+          toast.success("machinee actualizado exitosamente", {
             autoClose: 3000,
             position: "bottom-right",
             theme: "colored",
@@ -74,26 +75,26 @@ const MachinesPage=()=>{
     };
   }, []);
 
-  const [{ data: clientData, loading, error }, refetch] = useAxios(
-    "http://localhost:3000/clients"
+  const [{ data: machineData, loading, error }, refetch] = useAxios(
+    "http://localhost:3000/machine"
   );
-  const [clientToDelete, setClientToDelete] = useState(null);
+  const [machineToDelete, setmachineToDelete] = useState(null);
 
   const handleAddMachine = () => {
     router.push("/dashboard/machines/addMachine");
   };
 
-  const handleView = (client: any) => {
-    console.log("Viewing:", client);
-    router.push(`/dashboard/machines/seeMachine/${client.id}`);
+  const handleView = (machine: any) => {
+    console.log("Viewing:", machine);
+    router.push(`/dashboard/machines/seeMachine/${machine.id}`);
   };
 
-  const handleEdit = (client: any) => {
-    router.push(`/dashboard/machines/editMachine/${client.id}`);
+  const handleEdit = (machine: any) => {
+    router.push(`/dashboard/machines/editMachine/${machine.id}`);
   };
 
-  const promptToDelete = (client: any) => {
-    setClientToDelete(client);
+  const promptToDelete = (machine: any) => {
+    setmachineToDelete(machine);
   };
 
   if (loading) return <div className="text-center">
@@ -109,21 +110,27 @@ const MachinesPage=()=>{
 ;
   if (error) return router.push("/dashboard/errorPage");
 
-  interface Client {
+  interface machine {
     id: number;
-    clientFirstName: string;
-    clientLastName: string;
-    createdDate: string;
-    planType: string;
+    machineName: string;
+    acquisitionDate: string;
+    needMaintenance: string;
+    
   }
 
-  const sortByClientName = (clients: Client[]): Client[] => {
-    return clients
+  const sortMachinesName = (machines: machine[]): machine[] => {
+    return machines
       .slice()
-      .sort((a, b) => a.clientFirstName.localeCompare(b.clientFirstName));
+      .sort((a, b) => a.machineName.localeCompare(b.machineName));
   };
 
-  const sortedClientsData = sortByClientName(clientData);
+  const sortedMachines = sortMachinesName(machineData);
+
+  const filterMachines = (machines: machine[]): machine[] => {
+    return machines
+  }
+
+  const filteredMachines = filterMachines(machineData);
 
   return (
     <>
@@ -145,66 +152,75 @@ const MachinesPage=()=>{
         </svg>
       </button>
       <div className="container mx-auto p-4 w-[70%]">
-        <div className="flex justify-between items-center m-5">
+        <div className="flex justify-between items-center m-5 relative">
           <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
             Máquinas
           </h1>
           <button
+              className="absolute top-[4rem] right-60 text-blue-950"
+              onClick={() => router.back()}
+            >
+              <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m2.133 2.6 5.856 6.9L8 14l4 3 .011-7.5 5.856-6.9a1 1 0 0 0-.804-1.6H2.937a1 1 0 0 0-.804 1.6Z"/>
+              </svg>
+          </button>
+          <button
             onClick={handleAddMachine}
             className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
-          >
+          > 
             Agregar Máquina
           </button>
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="bg-[#1F1C53] text-white font-bold font-jost text-2xl">
+            <thead className="bg-[#818181] text-white font-bold font-jost text-2xl">
               <tr>
                 <th scope="col" className="px-6 py-3 text-center">
-                  Nombres
+                  Código
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
-                  Apellidos
+                  Nombre
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
-                  Fecha de registro
+                  Fecha de adquisición
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
-                  Plan
+                  Mantenimiento
                 </th>
-                <th colSpan={3} />
+                <th colSpan={3} >
+                  </th>
               </tr>
             </thead>
             <tbody>
-              {sortedClientsData.map((client: any, index) => (
+             {sortedMachines.map((machine: any, index) => (
                 <tr
-                  key={client.id}
+                  key={machine.id}
                   className={index % 2 === 0 ? " bg-[#DDDDE5]" : "bg-gray-100"}
                 >
                   <td className="text-black text-center px-4 py-2">
-                    {client.clientFirstName}
+                    {machine.id}
                   </td>
                   <td className="text-black text-center px-4 py-2">
-                    {client.clientLastName}
+                    {machine.machineName}
                   </td>
                   <td className="text-black text-center px-4 py-2">
-                    {client.createdDate.substring(0, 10)}
+                    {machine.acquisitionDate.substring(0, 10)}
                   </td>
                   <td className="text-black text-center px-4 py-2">
-                    {client.planType}
+                    {machine.needMaintenance}
                   </td>
                   <td className="text-black text-center px-4 py-2">
-                    <button onClick={() => handleView(client)}>
+                    <button onClick={() => handleView(machine)}>
                       <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
                     </button>
                   </td>
                   <td className="text-black text-center px-4 py-2">
-                    <button onClick={() => handleEdit(client)}>
+                    <button onClick={() => handleEdit(machine)}>
                       <PencilAltIcon className="h-5 w-5 text-[#1A4E1C] hover:text-[#173518]" />
                     </button>
                   </td>
                   <td className="text-black text-center px-4 py-2">
-                    <button onClick={() => promptToDelete(client)}>
+                    <button onClick={() => promptToDelete(machine)}>
                       <TrashIcon className="h-5 w-5 text-red-500 hover:text-red-700" />
                     </button>
                   </td>
@@ -215,9 +231,9 @@ const MachinesPage=()=>{
         </div>
       </div>
       <DeleteModal
-        isOpen={!!clientToDelete}
-        onClose={() => setClientToDelete(null)}
-        client={clientToDelete}
+        isOpen={!!machineToDelete}
+        onClose={() => setmachineToDelete(null)}
+        machine={machineToDelete}
       />
     </>
   );
