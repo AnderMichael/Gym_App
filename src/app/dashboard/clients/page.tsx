@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
 import { EyeIcon, TrashIcon, PencilAltIcon } from "@heroicons/react/outline";
+import { columnsClients, rowsClients } from "@/app/helpers/dataColumns";
+import Table from "@/components/Table";
 
 const ClientsPage = () => {
   const router = useRouter();
@@ -154,63 +156,15 @@ const ClientsPage = () => {
             Agregar Cliente
           </button>
         </div>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="bg-[#1F1C53] text-white font-bold font-jost text-2xl">
-              <tr>
-                <th scope="col" className="px-6 py-3 text-center">
-                  Nombres
-                </th>
-                <th scope="col" className="px-6 py-3 text-center">
-                  Apellidos
-                </th>
-                <th scope="col" className="px-6 py-3 text-center">
-                  Fecha de registro
-                </th>
-                <th scope="col" className="px-6 py-3 text-center">
-                  Plan
-                </th>
-                <th colSpan={3} />
-              </tr>
-            </thead>
-            <tbody>
-              {sortedClientsData.map((client: any, index) => (
-                <tr
-                  key={client.id}
-                  className={index % 2 === 0 ? " bg-[#DDDDE5]" : "bg-gray-100"}
-                >
-                  <td className="text-black text-center px-4 py-2">
-                    {client.clientFirstName}
-                  </td>
-                  <td className="text-black text-center px-4 py-2">
-                    {client.clientLastName}
-                  </td>
-                  <td className="text-black text-center px-4 py-2">
-                    {client.createdDate.substring(0, 10)}
-                  </td>
-                  <td className="text-black text-center px-4 py-2">
-                    {client.planType}
-                  </td>
-                  <td className="text-black text-center px-4 py-2">
-                    <button onClick={() => handleView(client)}>
-                      <EyeIcon className="h-5 w-5 text-blue-500 hover:text-blue-700" />
-                    </button>
-                  </td>
-                  <td className="text-black text-center px-4 py-2">
-                    <button onClick={() => handleEdit(client)}>
-                      <PencilAltIcon className="h-5 w-5 text-[#1A4E1C] hover:text-[#173518]" />
-                    </button>
-                  </td>
-                  <td className="text-black text-center px-4 py-2">
-                    <button onClick={() => promptToDelete(client)}>
-                      <TrashIcon className="h-5 w-5 text-red-500 hover:text-red-700" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Table color= "#1F1C53"
+        shadow = "#DDDDE5"
+        columns = {columnsClients}
+        dataRow = {rowsClients}
+        rows = {sortedClientsData}
+        handleEdit = {handleEdit}
+        handleView = {handleView}
+        promptToDelete = {promptToDelete}
+        />
       </div>
       <DeleteModal
         isOpen={!!clientToDelete}
