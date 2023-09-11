@@ -5,6 +5,8 @@ import { EyeIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./components/DeleteModal";
 import { toast } from "react-toastify";
+import Table from "@/components/Table";
+import { columnsEmployees, rowsEmployees } from "@/app/helpers/dataColumns";
 
 const EmployeePage = () => {
   const router = useRouter();
@@ -157,51 +159,15 @@ const EmployeePage = () => {
             Agregar Empleado
           </button>
         </div>
-        <div className="overflow-x-auto mb-4 rounded-xl shadow-lg shadow-[#C0C0C0]">
-          <table className="w-full table-auto">
-            <thead className="bg-[#DC6000] text-white font-bold font-jost text-2xl">
-              <tr>
-                <th className="p-4"> Nombre Completo </th>
-                <th className="p-4"> Cargo </th>
-                <th className="p-4"> Número de Contacto </th>
-                <th colSpan={3} />
-              </tr>
-            </thead>
-            <tbody>
-              {sortedEmployeesData.map((employee: any, index: number) => (
-                <tr
-                  key={employee.id}
-                  className={
-                    index % 2 === 0
-                      ? "bg-[#FBEFE6] text-center font-normal font-jost"
-                      : "bg-white text-center font-normal font-jost"
-                  }
-                >
-                  <td className="text-black px-4 py-2">
-                    {employee.employeename}
-                  </td>
-                  <td className="text-black px-4 py-2">{employee.cargo}</td>
-                  <td className="text-black px-4 py-2">{employee.numero}</td>
-                  <td className="text-black px-4 py-2">
-                    <button onClick={() => handleView(employee)}>
-                      <EyeIcon className="h-7 w-10 border-spacing-1 text-[#223A6B] hover:text-[#5769a5]" />
-                    </button>
-                  </td>
-                  <td className="text-black   px-4 py-2">
-                    <button onClick={() => handleEdit(employee)}>
-                      <PencilAltIcon className="h-7 w-7 text-[#1A4E1C] hover:text-[#447646]" />
-                    </button>
-                  </td>
-                  <td className="text-black   px-4 py-2">
-                    <button onClick={() => promptToDelete(employee)}>
-                      <TrashIcon className="h-7 w-7 text-[#CE0A0B] hover:text-[#e92626] font-thin" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Table color= "#DC6000"
+        shadow = "#FBEFE6"
+        columns = {columnsEmployees}
+        dataRow = {rowsEmployees}
+        rows = {sortedEmployeesData}
+        handleEdit = {handleEdit}
+        handleView = {handleView}
+        promptToDelete = {promptToDelete}
+        />
       </div>
       <DeleteModal
         isOpen={!!employeeToDelete}
