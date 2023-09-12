@@ -85,6 +85,12 @@ const MachinesPage = () => {
   );
   const [machineToDelete, setmachineToDelete] = useState(null);
 
+  const [filterVisible, setFilterVisible] = useState(false);
+
+  const showFilter = () => {
+    setFilterVisible(true);
+  };
+
   const handleAddMachine = () => {
     router.push("/dashboard/machines/addMachine");
   };
@@ -136,11 +142,6 @@ const MachinesPage = () => {
 
   const sortedMachines = sortMachinesName(machineData);
 
-  const filterMachines = (machines: Machine[]): Machine[] => {
-    return machines;
-  };
-
-  const filteredMachines = filterMachines(machineData);
 
   return (
     <>
@@ -166,26 +167,7 @@ const MachinesPage = () => {
           <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
             Máquinas
           </h1>
-          <button
-            className="absolute top-[4rem] right-60 text-blue-950"
-            onClick={() => router.back()}
-          >
-            <svg
-              className="w-6 h-6 text-gray-800 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 18"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m2.133 2.6 5.856 6.9L8 14l4 3 .011-7.5 5.856-6.9a1 1 0 0 0-.804-1.6H2.937a1 1 0 0 0-.804 1.6Z"
-              />
-            </svg>
-          </button>
+          
           <button
             onClick={handleAddMachine}
             className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
@@ -193,6 +175,17 @@ const MachinesPage = () => {
             Agregar Máquina
           </button>
         </div>
+        {filterVisible && (
+          <>
+        <label htmlFor="filterOptions" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Elige una opcion de filtrado</label>
+        <select id="filterOptions" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected></option>
+          <option value="US">Requiere Matenimiento</option>
+          <option value="CA">No Requiere Mantenimiento</option>
+      
+        </select>
+        </>
+      )}
         <Table
           color="bg-[#818181]"
           shadow="bg-[#DDDDE5]"
