@@ -3,20 +3,35 @@
 import React from "react";
 
 import { useRouter } from "next/navigation";
-import MachineForm from "./components/MachineForm";
+import useAxios from "axios-hooks";
+import MachineProfile from "../components/MachineProfile";
 
-const AddClient = () => {
+interface TokenProps {
+  params: {
+    id: string;
+  };
+  searchParams: string;
+}
+
+const SeeMachine = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
+
+  const [{ data: machineData, loading, error }] = useAxios(
+    `http://localhost:3000/machine/${params.id}`
+  );
+
+  if (loading) return <div>Cargando...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   const handleBackToClients = () => {
     router.back();
   };
   return (
     <>
-      <div className="flex flex-col p-4 justify-center items-center">
+      <div className="flex flex-col  justify-center items-center p-4">
         <div className="flex justify-between w-[75%] my-7">
           <h1 className="text-[#302E46] font-bold font-jost text-4xl ">
-            Agregar Máquina
+            Datos de la Máquina
           </h1>
           <button
             onClick={handleBackToClients}
@@ -26,10 +41,10 @@ const AddClient = () => {
             Volver a Maquinaria
           </button>
         </div>
-        <MachineForm />
+        <MachineProfile machineData={machineData} />
       </div>
     </>
   );
 };
 
-export default AddClient;
+export default SeeMachine;

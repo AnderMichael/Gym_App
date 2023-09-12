@@ -13,7 +13,7 @@ interface TokenProps {
   searchParams: string;
 }
 
-const AddClient = ({ params, searchParams }: TokenProps) => {
+const SeeClient = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
 
   const [{ data: clientData, loading, error }] = useAxios(
@@ -47,4 +47,4 @@ const AddClient = ({ params, searchParams }: TokenProps) => {
   );
 };
 
-export default AddClient;
+export default SeeClient;
