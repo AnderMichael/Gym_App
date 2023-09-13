@@ -35,10 +35,10 @@ const MachineForm = () => {
       await executePost({
         data: {
           machineName: data.name,
-          needMaintenance: data.maintenance,
+          needMaintenance: maintenance,
           acquisitionDate: data.acquisition,
           machineBrand: data.brand,
-          maintenanceDate: data.maintenance_date,
+          maintenanceDate: maintenance ? data.maintenance_date : "",
         },
       });
       router.replace("/dashboard/machines?added");
@@ -72,9 +72,13 @@ const MachineForm = () => {
           Mantenimiento
         </h1>
         <div className="flex space-x-4">
-          <CheckBoxInput register={register} onClick={isClicked} />
+          <CheckBoxInput onClick={isClicked} />
           {maintenance && (
-            <MaintenanceInput register={register} errors={errors} />
+            <MaintenanceInput
+              register={register}
+              errors={errors}
+              maintenanceCheck={maintenance}
+            />
           )}
         </div>
         <div className="flex">

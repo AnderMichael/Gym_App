@@ -38,11 +38,11 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
     try {
       await updateMachine({
         data: {
-          machineName: data.name,
-          needMaintenance: maintenance,
-          machineBrand: data.brand,
-          maintenanceDate: maintenance ? data.maintenance_date: "",
-          acquisitionDate: data.acquisition,
+          "machineName": data.name,
+          "needMaintenance": maintenance,
+          "machineBrand": data.brand,
+          "maintenanceDate": maintenance ? data.maintenance_date: "",
+          "acquisitionDate": data.acquisition,
         },
       });
       router.replace("/dashboard/machines?edited");
