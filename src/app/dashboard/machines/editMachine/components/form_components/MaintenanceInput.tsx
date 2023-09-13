@@ -21,7 +21,7 @@ const MaintenanceInput: React.FC<MaintenanceInputProps> = ({ register, errors, d
           value: date
         })}
       />
-      {errors.born_date?.type === "required" && (
+      {errors.maintenance_date?.type === "required" && (
         <p className="text-red-700 font-light leading-relaxed">
           * Debes introducir una fecha
         </p>
