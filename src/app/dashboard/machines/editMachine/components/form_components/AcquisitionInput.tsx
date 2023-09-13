@@ -3,10 +3,10 @@ import React from "react";
 interface AcquisitionInputProps {
   register: any;
   errors: any;
-  machineData: string
+  date:any;
 }
 
-const AcquisitionInput: React.FC<AcquisitionInputProps> = ({ register, errors, machineData}) => {
+const AcquisitionInput: React.FC<AcquisitionInputProps> = ({ register, errors, date }) => {
   return (
     <div className="mb-2 flex-col flex flex-1 ml-3">
       <label className="text-[#302E46] font-semibold text-xl font-jost">
@@ -18,7 +18,7 @@ const AcquisitionInput: React.FC<AcquisitionInputProps> = ({ register, errors, m
         type="date"
         {...register("acquisition", {
           required: true,
-          value: machineData,
+          value: date
         })}
       />
       {errors.born_date?.type === "required" && (

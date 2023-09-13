@@ -1,17 +1,12 @@
-import { machine } from "os";
 import React from "react";
 
 interface MaintenanceInputProps {
   register: any;
   errors: any;
-  machineData: string;
+  date: any;
 }
 
-const MaintenanceInput: React.FC<MaintenanceInputProps> = ({
-  register,
-  errors,
-  machineData,
-}) => {
+const MaintenanceInput: React.FC<MaintenanceInputProps> = ({ register, errors, date }) => {
   return (
     <div className="mb-2 flex-col flex flex-1 ml-3">
       <label className="text-[#302E46] font-semibold text-xl font-jost">
@@ -23,7 +18,7 @@ const MaintenanceInput: React.FC<MaintenanceInputProps> = ({
         type="date"
         {...register("maintenance_date", {
           required: true,
-          value: machineData,
+          value: date
         })}
       />
       {errors.born_date?.type === "required" && (

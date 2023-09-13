@@ -2,10 +2,10 @@ import React from "react";
 
 interface BrandInputProps {
   register: any;
-  machineData: string;
+  brand: any
 }
 
-const BrandInput: React.FC<BrandInputProps> = ({ register, machineData }) => {
+const BrandInput: React.FC<BrandInputProps> = ({ register, brand }) => {
   return (
     <div className="flex-1 flex flex-col mb-2">
       <label className="text-[#302E46] font-semibold text-xl font-jost">
@@ -14,7 +14,9 @@ const BrandInput: React.FC<BrandInputProps> = ({ register, machineData }) => {
       <select
         className="bg-white text-gray-800 rounded-lg text-center h-10"
         placeholder="Cargo"
-        {...register("brand", { value: machineData })}
+        {...register("brand", {
+          value: brand
+        })}
       >
         <option value="AFW - All Free Weight">AFW - All Free Weight</option>
         <option value="Adidas">Adidas</option>
