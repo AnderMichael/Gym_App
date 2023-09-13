@@ -69,14 +69,15 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
         </h1>
         <div className="flex flex-col">
           <div className="flex space-x-4">
-            <NameInput register={register} errors={errors} />
+            <NameInput register={register} errors={errors} name={machineData.machineName} />
             <DateInput
               register={register}
               errors={errors}
+              date={machineData.acquisitionDate}
             />
           </div>
           <div className="flex space-x-4">
-            <BrandInput register={register} />
+            <BrandInput register={register} brand={machineData.machineBrand} />
             
           </div>
         </div>
@@ -84,10 +85,11 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
           Mantenimiento
         </h1>
         <div className="flex space-x-4">
-          <CheckBoxInput register={register} />
+          <CheckBoxInput register={register} needMaintenance={machineData.needMaintenance} />
           <MaintenanceInput
             register={register}
             errors={errors}
+            date={machineData.maintenanceDate}
           />
         </div>
         <div className="flex">
