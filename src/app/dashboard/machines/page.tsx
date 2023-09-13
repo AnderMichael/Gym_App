@@ -1,5 +1,4 @@
 "use client";
-import { EyeIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useAxios from "axios-hooks";
