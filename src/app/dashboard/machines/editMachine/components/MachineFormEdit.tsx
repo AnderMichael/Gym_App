@@ -44,6 +44,7 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
             needMaintenance: data.maintenance,
             machineBrand: data.brand,
             maintenanceDate: data.maintenance_date,
+            acquisitionDate: data.acquisition
           },
         });
         router.replace("/dashboard/machines?edited");
