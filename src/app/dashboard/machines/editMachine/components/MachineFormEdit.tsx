@@ -77,7 +77,7 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
           </div>
           <div className="flex space-x-4">
             <BrandInput register={register} />
-            <NumberInput register={register} errors={errors} />
+            
           </div>
         </div>
         <h1 className="text-[#302E46] my-3 text-left text-3xl font-black font-jost">
