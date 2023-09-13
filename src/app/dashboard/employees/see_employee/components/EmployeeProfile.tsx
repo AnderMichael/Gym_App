@@ -42,8 +42,10 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
         <span>Cargando...</span>
       </div>
     );
-  if (error) return router.push("/dashboard/errorPage");
-
+  if (error) {
+    router.push("/dashboard/errorPage");
+    return <></>;
+  }
   return (
     <div className="flex bg-white p-10 rounded-xl w-[45%] shadow-xl shadow-[#C0C0C0]">
       <div className="flex flex-1 flex-col">
@@ -72,11 +74,7 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
           {employeeData.numero}
         </div>
 
-        <Button
-          color="bg-[#dc6000]"
-          title="Cerrar"
-          onClick={closeView}
-        />
+        <Button color="bg-[#dc6000]" title="Cerrar" onClick={closeView} />
       </div>
     </div>
   );
