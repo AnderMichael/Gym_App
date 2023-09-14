@@ -47,7 +47,7 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
     return <></>;
   }
   return (
-    <div className="flex bg-white p-10 rounded-xl w-[45%] shadow-xl shadow-[#C0C0C0]">
+    <div className="flex bg-white p-10 rounded-xl w-[45%] shadow-md shadow-[#C0C0C0]">
       <div className="flex flex-1 flex-col">
         <h1 className="text-[#302E46] my-5 text-left  text-3xl font-black font-jost">
           Datos Personales

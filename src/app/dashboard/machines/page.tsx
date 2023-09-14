@@ -164,12 +164,12 @@ const MachinesPage = () => {
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center m-5 relative">
           <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
-            Máquinas
+            Maquinaria
           </h1>
           
           <button
             onClick={handleAddMachine}
-            className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
+            className="font-bold font-jost text-lg bg-[#DC6000] hover:bg-yellow-500  text-white px-6 py-4 rounded-2xl shadow-[#C0C0C0] shadow-md"
           >
             Agregar Máquina
           </button>
