@@ -9,7 +9,7 @@ interface MachineFeaturesProps {
 
 const MachineProfile = ({ machineData }: MachineFeaturesProps) => {
   return (
-    <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md">
+    <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md shadow-md shadow-[#C0C0C0]">
       <div className="flex flex-col space-y-4 md:space-y-6">
         <MachineInfo machineData={machineData} />
         <MaintenanceInfo machineData={machineData} />

@@ -15,7 +15,7 @@ const Card = ({
   return (
     <>
       <button
-        className={`${!disabled ? `${color} hover:bg-opacity-60` : "bg-gray-400"} rounded-2xl flex max-w-sm overflow-hidden w-[80%] h-[45%] justify-center items-center mx-5 shadow-md`}
+        className={`${!disabled ? `${color} hover:bg-opacity-60` : "bg-gray-400"} rounded-2xl flex max-w-sm overflow-hidden w-[80%] h-[45%] justify-center items-center mx-5 shadow-xl shadow-[#C0C0C0]`}
         onClick={redirection}
         disabled={disabled}
       >
