@@ -23,8 +23,6 @@ const Table = (props: TableApp) => {
         return setCorrectDate(employeeData);
       case "needMaintenance":
         return employeeData ? "Requiere" : "No requiere";
-      case "acquisitionDate":
-        return setCorrectDate(employeeData);
       default:
         return employeeData;
     }

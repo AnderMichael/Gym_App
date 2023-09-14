@@ -3,6 +3,7 @@ import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import Button from "@/components/Button";
 
 interface ClientFormProps {
   clientData: any;
@@ -88,7 +89,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
   };
 
   return (
-    <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md">
+    <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md shadow-md shadow-[#C0C0C0]">
       <form
         className="flex flex-col space-y-4 md:space-y-6"
         onSubmit={handleSubmit(onSubmitForm)}
@@ -109,7 +110,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
                 required: true,
                 minLength: 5,
                 maxLength: 50,
-                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
+                pattern: /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
                 value: clientData.clientFirstName,
               })}
             />
@@ -130,7 +131,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
             )}
             {errors.first_name?.type === "pattern" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * Este no es un nombre válido, nombres con mayúsculas
+                * Este no es un nombre válido, nombres con mayúsculas y sin caracteres especiales
               </p>
             )}
           </div>
@@ -147,7 +148,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
                 required: true,
                 minLength: 5,
                 maxLength: 50,
-                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
+                pattern: /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
                 value: clientData.clientLastName,
               })}
             />
@@ -163,12 +164,12 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
             )}
             {errors.last_name?.type === "maxLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe tener 50 caracteres como máximo
+                * El apellido debe tener 50 caracteres como máximo
               </p>
             )}
             {errors.last_name?.type === "pattern" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * Este no es un nombre válido, nombres con mayúsculas
+                * Este no es un apellido válido, apellidos con mayúsculas y sin caracteres especiales
               </p>
             )}
           </div>
@@ -310,12 +311,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
 
         <div className="flex justify-between">
           <div className="flex flex-1 mx-1">
-            <button
-              className="flex-1 bg-[#1AC317] p-2 text-white rounded-xl hover:bg-[#246623] "
-              onClick={registration}
-            >
-              <h1 className="font-semibold">Actualizar</h1>
-            </button>
+          <Button title="Actualizar" color="bg-[#3A7E3D]" onClick={registration}/>
           </div>
         </div>
       </form>
