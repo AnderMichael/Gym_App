@@ -1,4 +1,4 @@
-export type Client = {
+type Client = {
     clientFirstName: string;
     clientLastName: string;
     borndate: string;
@@ -9,3 +9,5 @@ export type Client = {
     payplan: string;
     planType: string;
 }
+
+export default Client;

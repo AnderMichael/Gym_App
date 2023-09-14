@@ -18,6 +18,12 @@ export const columnsMachines = [
   "Mantenimiento",
 ];
 
+export const rowsMachines = [
+  "id",
+  "machineName",
+  "acquisitionDate",
+  "needMaintenance",
+];
 
 export const rowsEmployees = [
   "employeename",

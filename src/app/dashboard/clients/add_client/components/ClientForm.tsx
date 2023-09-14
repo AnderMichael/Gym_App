@@ -61,10 +61,6 @@ const ClientForm = () => {
     setIsCancel(true);
   };
 
-  const cancellation = () => {
-    setIsCancel(false);
-    router.back();
-  };
 
   return (
     <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md">
@@ -249,32 +245,6 @@ const ClientForm = () => {
         </h1>
 
         <div className="flex justify-center mt-2">
-          <div className="mb-2 flex-col flex flex-1 mr-3">
-            <label className="text-[#302E46] font-semibold text-xl font-jost">
-              Fecha de registro
-            </label>
-            <input
-              className="bg-white text-gray-800 rounded-lg text-center h-10"
-              placeholder="2023-08-13"
-              type="date"
-              {...register("register_date", {
-                required: true,
-                pattern:
-                  /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/,
-              })}
-            />
-            {errors.register_date?.type === "required" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Debes introducir una fecha
-              </p>
-            )}
-            {errors.register_date?.type === "pattern" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Esta no es una fecha válida, el formato es yyyy-mm-dd
-              </p>
-            )}
-          </div>
-
           <div className="mb-2 flex-col flex flex-1 mr-3">
             <label className="text-[#302E46] font-semibold text-xl font-jost">
               Método de Pago

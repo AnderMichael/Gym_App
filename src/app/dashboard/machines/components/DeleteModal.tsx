@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import useAxios from "axios-hooks";
-import { toast } from "react-toastify";
+import setCorrectDate from "@/helpers/dateCorrector";
+import Button from "@/components/Button";
 
-const DeleteModal = ({ isOpen, onClose, client }: any) => {
+const DeleteModal = ({ isOpen, onClose, machine }: any) => {
   const [, execute] = useAxios(
-    { url: `http://localhost:3000/clients/${client?.id}`, method: "DELETE" },
+    { url: `http://localhost:3000/machine/${machine?.id}`, method: "DELETE" },
     { manual: true }
   );
 
@@ -76,37 +77,37 @@ const DeleteModal = ({ isOpen, onClose, client }: any) => {
             className="absolute top-0 left-0 w-full h-full bg-black opacity-50"
             onClick={onClose}
           ></div>
-          <div className="bg-[#f2f2f2] p-5 rounded-lg z-10 text-[#3D3C51]">
-            <p className="font-bold text-xl m-4">
-              ¿Estás seguro de borrar al siguiente cliente?
+          <div className="bg-[#f2f2f2] p-5 rounded-lg z-10 text-[#3D3C51] font-jost">
+            <p className="font-bold text-xl m-4 ">
+              ¿Está seguro de eliminar la siguiente máquina?
             </p>
             <p className="text-xl m-4">
-              <span className="font-bold">Nombre Completo:</span>{" "}
-              <span className="">{client?.clientFirstName + " " + client?.clientLastName}</span>
+              <span className="font-bold">Nombre:</span>{" "}
+              <span className="">{machine?.machineName}</span>
             </p>
             <p className="text-xl m-4">
-              <span className="font-bold">Plan:</span>{" "}
-              <span className="">{client?.planType}</span>
+              <span className="font-bold">Código:</span>{" "}
+              <span className="">{machine?.id}</span>
             </p>
             <p className="text-xl m-4">
-              <span className="font-bold">Fecha de registro:</span>{" "}
-              <span className="">{client?.createdDate.substring(0, 10)}</span>
+              <span className="font-bold">Fecha de Adquisición:</span>{" "}
+              <span className="">
+                {setCorrectDate(machine?.acquisitionDate)}
+              </span>
             </p>
 
             <div className="flex justify-end space-x-4 mt-5">
-              <button
-                className="flex-1 px-4 py-2 bg-[#3A7E3D] text-white rounded-xl"
+              <Button
+                title="Sí, obviamente"
                 onClick={handleDelete}
-              >
-                Sí, obviamente
-              </button>
+                color="bg-[#3A7E3D]"
+              />
 
-              <button
-                className="flex-1 px-4 py-2 bg-[#CE0A0B] text-white rounded-xl"
+              <Button
+                title="No, me arrepentí"
                 onClick={onClose}
-              >
-                No, me arrepentí
-              </button>
+                color="bg-[#CE0A0B]"
+              />
             </div>
           </div>
         </div>

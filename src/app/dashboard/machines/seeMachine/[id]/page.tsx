@@ -1,22 +1,24 @@
 "use client";
-import Button from "@/components/Button";
+
+import React from "react";
+
 import { useRouter } from "next/navigation";
 import useAxios from "axios-hooks";
+import MachineProfile from "../components/MachineProfile";
 
-interface EmployeeProfileProps {
-  employeeId: string;
+interface TokenProps {
+  params: {
+    id: string;
+  };
+  searchParams: string;
 }
 
-const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
+const SeeMachine = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
 
-  const [{ data: employeeData, loading, error }] = useAxios(
-    `http://localhost:3000/employee/${employeeId}`
+  const [{ data: machineData, loading, error }] = useAxios(
+    `http://localhost:3000/machine/${params.id}`
   );
-
-  const closeView = () => {
-    router.back();
-  };
 
   if (loading)
     return (
@@ -42,41 +44,30 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
         <span>Cargando...</span>
       </div>
     );
-  if (error) {
-    router.push("/dashboard/errorPage");
-    return <></>;
-  }
+  if (error) return router.push("/dashboard/errorPage");
+
+  const handleBackToClients = () => {
+    router.back();
+  };
   return (
-    <div className="flex bg-white p-10 rounded-xl w-[45%] shadow-xl shadow-[#C0C0C0]">
-      <div className="flex flex-1 flex-col">
-        <h1 className="text-[#302E46] my-5 text-left  text-3xl font-black font-jost">
-          Datos Personales
-        </h1>
-
-        <label className="text-[#302E46] my-1 font-semibold text-xl font-jost">
-          Nombre Completo
-        </label>
-        <div className="flex bg-[#d2d1d7] my-1 text-black text-center rounded-lg items-center justify-center h-[45px] ">
-          {employeeData.employeename}
+    <>
+      <div className="flex flex-col  justify-center items-center p-4">
+        <div className="flex justify-between w-[75%] my-7">
+          <h1 className="text-[#302E46] font-bold font-jost text-4xl ">
+            Datos de la Máquina
+          </h1>
+          <button
+            onClick={handleBackToClients}
+            type="button"
+            className="text-white bg-[#DC6000] hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-bold font-jost rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
+          >
+            Volver a Maquinaria
+          </button>
         </div>
-
-        <label className="text-[#302E46] my-1 font-semibold text-xl font-jost">
-          Cargo
-        </label>
-        <div className="flex bg-[#d2d1d7] my-1 text-black text-center rounded-lg items-center justify-center h-[45px] ">
-          {employeeData.cargo}
-        </div>
-
-        <label className="text-[#302E46] my-1 font-semibold text-xl font-jost">
-          Número de Contacto
-        </label>
-        <div className="flex bg-[#d2d1d7] mt-1 mb-5 text-black text-center rounded-lg items-center justify-center h-[45px] ">
-          {employeeData.numero}
-        </div>
-
-        <Button color="bg-[#dc6000]" title="Cerrar" onClick={closeView} />
+        <MachineProfile machineData={machineData} />
       </div>
-    </div>
+    </>
   );
 };
-export default EmployeeProfile;
+
+export default SeeMachine;
