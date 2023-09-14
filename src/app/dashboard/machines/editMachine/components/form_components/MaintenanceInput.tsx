@@ -4,9 +4,10 @@ interface MaintenanceInputProps {
   register: any;
   errors: any;
   date: any;
+  validateMaintenanceDate : any;
 }
 
-const MaintenanceInput: React.FC<MaintenanceInputProps> = ({ register, errors, date }) => {
+const MaintenanceInput: React.FC<MaintenanceInputProps> = ({ register, errors, date, validateMaintenanceDate }) => {
   return (
     <div className="mb-2 flex-col flex flex-1 ml-3">
       <label className="text-[#302E46] font-semibold text-xl font-jost">
@@ -18,12 +19,13 @@ const MaintenanceInput: React.FC<MaintenanceInputProps> = ({ register, errors, d
         type="date"
         {...register("maintenance_date", {
           required: true,
-          value: date
+          value: date,
+          validate: validateMaintenanceDate
         })}
       />
-      {errors.maintenance_date?.type === "required" && (
+      {errors.maintenance_date && (
         <p className="text-red-700 font-light leading-relaxed">
-          * Debes introducir una fecha
+          * {errors.maintenance_date.message}
         </p>
       )}
     </div>

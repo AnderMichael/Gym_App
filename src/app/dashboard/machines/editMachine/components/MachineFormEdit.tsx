@@ -23,7 +23,8 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm(); // NOTE: Para hacer validaciones en el formulario
+    watch,
+  } = useForm();// NOTE: Para hacer validaciones en el formulario
 
   const [, updateMachine] = useAxios(
     {
@@ -32,6 +33,13 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
     },
     { manual: true }
   );
+  const acquisitionDate = watch("acquisition");
+  const validateMaintenanceDate = (value: any) => {
+    if (new Date(value) <= new Date(acquisitionDate)) {
+      return "La fecha de mantenimiento debe ser mayor que la fecha de adquisición";
+    }
+    return true;
+  };
 
   const onSubmitForm = async (data: any) => {
     console.log(data);
@@ -41,7 +49,7 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
           "machineName": data.name,
           "needMaintenance": maintenance,
           "machineBrand": data.brand,
-          "maintenanceDate": maintenance ? data.maintenance_date: "",
+          "maintenanceDate": maintenance ? data.maintenance_date : "",
           "acquisitionDate": data.acquisition,
         },
       });
@@ -94,6 +102,7 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
               register={register}
               errors={errors}
               date={machineData.maintenanceDate}
+              validateMaintenanceDate={validateMaintenanceDate}
             />
           )}
         </div>
