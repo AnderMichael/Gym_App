@@ -19,7 +19,8 @@ const MachineForm = () => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm(); // NOTE: Para hacer validaciones en el formulario
+    watch,
+  } = useForm();// NOTE: Para hacer validaciones en el formulario
 
   const [, executePost] = useAxios(
     {
@@ -28,6 +29,15 @@ const MachineForm = () => {
     },
     { manual: true }
   );
+  const acquisitionDate = watch("acquisition");
+
+  const validateMaintenanceDate = (value: any) => {
+    if (new Date(value) <= new Date(acquisitionDate)) {
+      return "La fecha de mantenimiento debe ser mayor que la fecha de adquisición";
+    }
+    return true;
+  };
+
 
   const onSubmitForm = async (data: any) => {
     console.log(data);
@@ -79,6 +89,7 @@ const MachineForm = () => {
               register={register}
               errors={errors}
               maintenanceCheck={maintenance}
+              validateMaintenanceDate={validateMaintenanceDate}
             />
           )}
         </div>

@@ -171,7 +171,7 @@ const MachinesPage = () => {
           <button
             id="addMachineButton"
             onClick={handleAddMachine}
-            className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
+            className="font-bold font-jost text-lg bg-[#DC6000] hover:bg-yellow-500  text-white px-6 py-4 rounded-2xl shadow-[#C0C0C0] shadow-md"
           >
             Agregar Máquina
           </button>
