@@ -89,7 +89,7 @@ const MachineForm = () => {
               register={register}
               errors={errors}
               maintenanceCheck={maintenance}
-              validateMaintenanceDate={validateMaintenanceDate}
+              
             />
           )}
         </div>

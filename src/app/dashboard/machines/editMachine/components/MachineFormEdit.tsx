@@ -103,7 +103,7 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
               register={register}
               errors={errors}
               date={machineData.maintenanceDate}
-              validateMaintenanceDate={validateMaintenanceDate}
+              
             />
           )}
         </div>
