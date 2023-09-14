@@ -78,7 +78,7 @@ const DeleteModal = ({ isOpen, onClose, machine }: any) => {
             onClick={onClose}
           ></div>
           <div className="bg-[#f2f2f2] p-5 rounded-lg z-10 text-[#3D3C51] font-jost">
-            <p className="font-bold text-xl m-4 ">
+            <p id="deleteMachineConfirmationText" className="font-bold text-xl m-4 ">
               ¿Está seguro de eliminar la siguiente máquina?
             </p>
             <p className="text-xl m-4">

@@ -128,7 +128,7 @@ const MachinesPage = () => {
             />
           </svg>
         </div>
-        <span>Cargando...</span>
+        <span id="machinesLoadingText">Cargando...</span>
       </div>
     );
   if (error) return router.push("/dashboard/errorPage");
@@ -145,6 +145,7 @@ const MachinesPage = () => {
   return (
     <>
       <button
+        id="backButtonMachines"
         className="absolute top-[4rem] ml-14 text-blue-950"
         onClick={() => router.back()}
       >
@@ -163,11 +164,12 @@ const MachinesPage = () => {
       </button>
       <div className="container mx-auto p-4 w-[70%]">
         <div className="flex justify-between items-center m-5 relative">
-          <h1 className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
+          <h1 id="machinesTitle" className="text-[#302E46] my-5 text-left  text-4xl font-black font-jost ">
             Máquinas
           </h1>
           
           <button
+            id="addMachineButton"
             onClick={handleAddMachine}
             className="font-bold font-jost text-lg bg-[#3d3b57] hover:bg-[#302E46]  text-white px-6 py-4 rounded-2xl shadow-black shadow-md"
           >
@@ -197,6 +199,7 @@ const MachinesPage = () => {
         />
       </div>
       <DeleteModal
+        id="machinesDeleteModal"
         isOpen={!!machineToDelete}
         onClose={() => setmachineToDelete(null)}
         machine={machineToDelete}

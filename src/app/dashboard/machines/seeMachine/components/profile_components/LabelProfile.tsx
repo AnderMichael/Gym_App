@@ -6,7 +6,7 @@ interface LabelProfileProps {
 
 const LabelProfile = ({ title }: LabelProfileProps) => {
   return (
-    <label className="text-[#302E46] font-semibold text-xl font-jost">
+    <label id="seeMachineLabelProfile" className="text-[#302E46] font-semibold text-xl font-jost">
       {title}
     </label>
   );

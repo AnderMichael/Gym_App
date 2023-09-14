@@ -55,10 +55,11 @@ const MachineForm = () => {
   return (
     <div className="flex bg-white p-10 rounded-md shadow-md shadow-[#C0C0C0] w-[75%]">
       <form
+        id="addMachineForm"
         className="flex flex-1 flex-col space-y-4 md:space-y-6 justify-center"
         onSubmit={handleSubmit(onSubmitForm)}
       >
-        <h1 className="text-[#302E46] my-3 text-left text-3xl font-black font-jost">
+        <h1 id="addMachineFormTitle" className="text-[#302E46] my-3 text-left text-3xl font-black font-jost">
           Información de la Máquina
         </h1>
         <div className="flex flex-col">
