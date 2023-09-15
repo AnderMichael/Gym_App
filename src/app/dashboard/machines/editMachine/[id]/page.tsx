@@ -17,7 +17,7 @@ const EditMachine = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
 
   const [{ data: machineData, loading, error }] = useAxios(
-    `${process.env.next_public_url_backend}/machine/${params.id}`
+    `${process.env.NEXT_PUBLIC_URL_BACKEND}/machine/${params.id}`
   );
 
   if (loading)

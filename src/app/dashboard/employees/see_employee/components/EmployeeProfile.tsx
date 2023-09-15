@@ -11,7 +11,7 @@ const EmployeeProfile = ({ employeeId }: EmployeeProfileProps) => {
   const router = useRouter();
 
   const [{ data: employeeData, loading, error }] = useAxios(
-    `http://localhost:3000/employee/${employeeId}`
+    `${process.env.NEXT_PUBLIC_URL_BACKEND}/employee/${employeeId}`
   );
 
   const closeView = () => {

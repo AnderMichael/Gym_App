@@ -80,7 +80,7 @@ const MachinesPage = () => {
   }, [router]);
 
   const [{ data: machineData, loading, error }, refetch] = useAxios(
-    `${process.env.next_public_url_backend}/machine`
+    `${process.env.NEXT_PUBLIC_URL_BACKEND}/machine`
   );
   const [machineToDelete, setmachineToDelete] = useState(null);
 

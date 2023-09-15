@@ -27,7 +27,6 @@ const EmployeeForm = () => {
   );
 
   const onSubmitForm = async (data: any) => {
-    console.log(data);
     if (isCancel) {
       try {
         await executePost({
