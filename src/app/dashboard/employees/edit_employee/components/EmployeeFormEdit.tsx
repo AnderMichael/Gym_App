@@ -22,7 +22,7 @@ const EmployeeFormEdit = ({ employeeData }: EmployeeProfileProps) => {
     useAxios(
       {
         method: "PATCH",
-        url: `http://localhost:3000/employee/${employeeData.id}`,
+        url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/employee/${employeeData.id}`,
       },
       { manual: true }
     );

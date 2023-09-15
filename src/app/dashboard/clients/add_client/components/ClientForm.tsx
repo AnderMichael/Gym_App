@@ -26,7 +26,7 @@ const ClientForm = () => {
 
   const [, executePost] = useAxios(
     {
-      url: "http://localhost:3000/clients",
+      url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/clients`,
       method: "POST",
     },
     { manual: true }

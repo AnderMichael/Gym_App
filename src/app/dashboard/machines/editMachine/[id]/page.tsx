@@ -13,11 +13,11 @@ interface TokenProps {
   searchParams: string;
 }
 
-const editMachine = ({ params, searchParams }: TokenProps) => {
+const EditMachine = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
 
   const [{ data: machineData, loading, error }] = useAxios(
-    `http://localhost:3000/machine/${params.id}`
+    `${process.env.next_public_url_backend}/machine/${params.id}`
   );
 
   if (loading)
@@ -71,4 +71,4 @@ const editMachine = ({ params, searchParams }: TokenProps) => {
   );
 };
 
-export default editMachine;
+export default EditMachine;

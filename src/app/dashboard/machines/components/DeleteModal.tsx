@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 
 const DeleteModal = ({ isOpen, onClose, machine }: any) => {
   const [, execute] = useAxios(
-    { url: `http://localhost:3000/machine/${machine?.id}`, method: "DELETE" },
+    { url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/machine/${machine?.id}`, method: "DELETE" },
     { manual: true }
   );
 

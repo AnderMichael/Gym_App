@@ -79,10 +79,10 @@ const EmployeePage = () => {
         sessionStorage.removeItem("notification");
       }
     };
-  }, []);
+  }, [router]);
 
   const [{ data: employeesData, loading, error }, refetch] = useAxios(
-    "http://localhost:3000/employee"
+    `${process.env.NEXT_PUBLIC_URL_BACKEND}/employee`
   );
 
   const handleAddEmployee = () => {

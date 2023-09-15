@@ -20,7 +20,7 @@ const EmployeeForm = () => {
 
   const [, executePost] = useAxios(
     {
-      url: "http://localhost:3000/employee",
+      url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/employee`,
       method: "POST",
     },
     { manual: true }

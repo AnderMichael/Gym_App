@@ -24,7 +24,7 @@ const MachineForm = () => {
 
   const [, executePost] = useAxios(
     {
-      url: "http://localhost:3000/machine",
+      url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/machine`,
       method: "POST",
     },
     { manual: true }

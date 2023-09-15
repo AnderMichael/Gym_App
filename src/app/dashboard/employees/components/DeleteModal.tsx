@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const DeleteModal = ({ isOpen, onClose, employee }: any) => {
   const [, execute] = useAxios(
-    { url: `http://localhost:3000/employee/${employee?.id}`, method: "DELETE" },
+    { url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/employee/${employee?.id}`, method: "DELETE" },
     { manual: true }
   );
 

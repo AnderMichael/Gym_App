@@ -1,6 +1,6 @@
 import React from "react";
 import LabelProfile from "./LabelProfile";
-import { Client } from "../../../types/Client";
+import Client  from "../../../types/Client";
 import TextProfile from "./TextProfile";
 import TitleProfile from "./TitleProfile";
 

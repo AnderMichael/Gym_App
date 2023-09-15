@@ -15,7 +15,7 @@ const EditEmployee = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
   
   const [{ data: employeeData, loading, error }] = useAxios(
-    `http://localhost:3000/employee/${params.id}`
+    `${process.env.NEXT_PUBLIC_URL_BACKEND}/employee/${params.id}`
   );
 
   if (loading)

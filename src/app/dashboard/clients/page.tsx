@@ -73,10 +73,10 @@ const ClientsPage = () => {
         sessionStorage.removeItem("notification");
       }
     };
-  }, []);
+  }, [router]);
 
   const [{ data: clientData, loading, error }, refetch] = useAxios(
-    "http://localhost:3000/clients"
+    `${process.env.NEXT_PUBLIC_URL_BACKEND}/clients`
   );
   const [clientToDelete, setClientToDelete] = useState(null);
 

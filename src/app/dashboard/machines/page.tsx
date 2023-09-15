@@ -77,10 +77,10 @@ const MachinesPage = () => {
         sessionStorage.removeItem("notification");
       }
     };
-  }, []);
+  }, [router]);
 
   const [{ data: machineData, loading, error }, refetch] = useAxios(
-    "http://localhost:3000/machine"
+    `${process.env.next_public_url_backend}/machine`
   );
   const [machineToDelete, setmachineToDelete] = useState(null);
 

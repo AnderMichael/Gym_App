@@ -13,11 +13,11 @@ interface TokenProps {
   searchParams: string;
 }
 
-const addClient = ({ params, searchParams }: TokenProps) => {
+const AddClient = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
 
   const [{ data: clientData, loading, error }] = useAxios(
-    `http://localhost:3000/clients/${params.id}`
+    `${process.env.NEXT_PUBLIC_URL_BACKEND}/clients/${params.id}`
   );
 
   if (loading)
@@ -70,4 +70,4 @@ const addClient = ({ params, searchParams }: TokenProps) => {
   );
 };
 
-export default addClient;
+export default AddClient;

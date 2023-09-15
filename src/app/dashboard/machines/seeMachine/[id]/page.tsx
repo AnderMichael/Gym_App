@@ -17,7 +17,7 @@ const SeeMachine = ({ params, searchParams }: TokenProps) => {
   const router = useRouter();
 
   const [{ data: machineData, loading, error }] = useAxios(
-    `http://localhost:3000/machine/${params.id}`
+    `${process.env.next_public_url_backend}/machine/${params.id}`
   );
 
   if (loading)

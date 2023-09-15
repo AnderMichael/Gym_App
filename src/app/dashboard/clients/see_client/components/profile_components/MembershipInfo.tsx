@@ -1,6 +1,6 @@
 // MembershipInfo.tsx
 import React from "react";
-import { Client } from "../../../types/Client";
+import  Client  from "../../../types/Client";
 import LabelProfile from "./LabelProfile";
 import TextProfile from "./TextProfile";
 import TitleProfile from "./TitleProfile";

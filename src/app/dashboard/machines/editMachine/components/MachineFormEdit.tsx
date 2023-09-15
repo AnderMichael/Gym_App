@@ -28,7 +28,7 @@ const MachineFormEdit = ({ machineData }: EditFormProps) => {
 
   const [, updateMachine] = useAxios(
     {
-      url: `http://localhost:3000/machine/${machineData.id}`,
+      url: `${process.env.next_public_url_backend}/machine/${machineData.id}`,
       method: "PATCH",
     },
     { manual: true }

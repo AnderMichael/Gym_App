@@ -18,13 +18,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProvider>
-      <html lang="en">
+
+    <html lang="en">
+
+      <body className={poppins.className}>
         <div className="toast-container">
+
           <ToastContainer limit={2} theme="colored" />
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </div>
-        <body className={poppins.className}>{children}</body>
-      </html>
-    </AuthProvider>
+
+      </body>
+    </html >
+
   );
 }

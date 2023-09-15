@@ -33,8 +33,8 @@ const Table = (props: TableApp) => {
       <table className="w-full table-auto">
         <thead className={theadClass}>
           <tr>
-            {props.columns.map((title: string) => (
-              <th className="p-4">{title}</th>
+            {props.columns.map((title: string, index: number) => (
+              <th key={index} className="p-4">{title}</th>
             ))}
 
             <th colSpan={3} />
@@ -50,8 +50,8 @@ const Table = (props: TableApp) => {
                   : "bg-white text-center font-normal font-jost"
               }
             >
-              {props.dataRow.map((data: any) => (
-                <td className="text-black px-4 py-2">
+              {props.dataRow.map((data: any,index: number) => (
+                <td className="text-black px-4 py-2" key = {index}>
                   {dataTreatment(data, employee[data])}
                 </td>
               ))}

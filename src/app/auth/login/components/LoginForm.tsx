@@ -8,7 +8,7 @@ import EmailInput from "./form_components/EmailInput";
 import PasswordInput from "./form_components/PasswordInput";
 import IncorrectText from "./form_components/IncorrectText";
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const router = useRouter();
   const {
     register,
