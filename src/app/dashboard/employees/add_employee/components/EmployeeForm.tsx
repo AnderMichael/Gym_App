@@ -4,7 +4,9 @@ import useAxios from "axios-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import NameInput from "./form_components/NameInput";
+import ChargeInput from "./form_components/ChargeInput";
+import NumberInput from "./form_components/NumberInput";
 
 const EmployeeForm = () => {
   // ! Hooks para el form
@@ -16,17 +18,16 @@ const EmployeeForm = () => {
     handleSubmit,
   } = useForm(); // NOTE: Para hacer validaciones en el formulario
 
-  
   const [, executePost] = useAxios(
     {
-      url: "http://localhost:3000/employee",
+      url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/employee`,
       method: "POST",
     },
     { manual: true }
   );
 
   const onSubmitForm = async (data: any) => {
-    console.log(data)
+    console.log(data);
     if (isCancel) {
       try {
         await executePost({
@@ -54,101 +55,31 @@ const EmployeeForm = () => {
   };
 
   return (
-    <div className="flex bg-white p-10 rounded-md shadow-md shadow-[#C0C0C0]">
+    <div className="flex bg-white p-10 rounded-md shadow-md shadow-[#C0C0C0] w-[45%]">
       <form
-        className="flex flex-col space-y-4 md:space-y-6 w-[400px]"
+        className="flex flex-1 flex-col space-y-4 md:space-y-6"
         onSubmit={handleSubmit(onSubmitForm)}
       >
-        <div className="flex flex-col">
-          <h1 className="text-[#302E46] my-5 text-left  text-3xl font-black font-jost">Datos Personales</h1>
-          <div className="mb-2 flex-col flex">
-            <label className="text-[#302E46] font-semibold text-xl font-jost p-3">Nombre Completo</label>
-            <input
-              className="bg-white text-gray-800 rounded-lg text-center h-10"
-              placeholder="Panquesito del Castillo Vainilla"
-              type="text"
-              {...register("name", {
-                required: true,
-                minLength: 5,
-                maxLength: 50,
-                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
-              })}
-            />
-            {errors.name?.type === "required" && (
-              <p className=" text-red-700 font-light leading-relaxed">
-                * Debes introducir un nombre
-              </p>
-            )}
-            {errors.name?.type === "minLength" && (
-              <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe tener 5 caracteres como mínimo
-              </p>
-            )}
-            {errors.name?.type === "maxLength" && (
-              <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe tener 50 caracteres como máximo
-              </p>
-            )}
-            {errors.name?.type === "pattern" && (
-              <p className=" text-red-700 font-light leading-relaxed">
-                * Este no es un nombre válido, nombres con mayúsculas
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <div className="mb-2 flex flex-col">
-            <label className="text-[#302E46] font-semibold text-xl font-jost p-3">Cargo</label>
-            <select
-              className="bg-white text-gray-800 rounded-lg text-center h-10"
-              placeholder="Cargo"
-              {...register("charge")}
-            >
-              <option value="Entrenador">Entrenador</option>
-              <option value="Conserje">Conserje</option>
-            </select>
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <div className="mb-2 flex-col flex">
-            <label className="text-[#302E46] font-semibold text-xl font-jost p-3">Numero de Contacto</label>
-            <input
-              className="bg-white text-gray-800 rounded-lg text-center h-10"
-              placeholder="66666666"
-              type="text"
-              {...register("contact", {
-                required: true,
-                pattern: /^[1-9][0-9]{7}$/,
-              })}
-            />
-            {errors.contact?.type === "required" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Debes introducir un número de télefono
-              </p>
-            )}
-            {errors.contact?.type === "pattern" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Este no es un número de teléfono
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="flex justify-between">
+        <h1 className="text-[#302E46] my-3 text-left text-3xl font-black font-jost">
+          Datos Personales
+        </h1>
+        <NameInput register={register} errors={errors} />
+        <ChargeInput register={register} />
+        <NumberInput register={register} errors={errors} />
+        <div className="flex">
           <div className="flex flex-1 mx-1">
-            <button
-              className="flex-1 bg-[#3A7E3D] p-2 text-white rounded-xl hover:bg-[#246623]"
+            <Button
+              color="bg-[#3A7E3D]"
+              title="Registrar"
               onClick={registration}
-            >
-              <h1 className="font-semibold font-jost text-xl">Registrar</h1>
-            </button>
+            />
           </div>
           <div className="flex flex-1 mx-1">
-            <button
-              className="flex-1 bg-[#CE0A0B] p-2 text-white rounded-xl hover:bg-[#782828] "
+            <Button
+              color="bg-[#CE0A0B]"
+              title="Cancelar"
               onClick={cancellation}
-            >
-              <h1 className="font-semibold font-jost text-xl">Cancelar</h1>
-            </button>
+            />
           </div>
         </div>
       </form>

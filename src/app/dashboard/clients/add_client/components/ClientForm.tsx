@@ -26,7 +26,7 @@ const ClientForm = () => {
 
   const [, executePost] = useAxios(
     {
-      url: "http://localhost:3000/clients",
+      url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/clients`,
       method: "POST",
     },
     { manual: true }
@@ -61,13 +61,9 @@ const ClientForm = () => {
     setIsCancel(true);
   };
 
-  const cancellation = () => {
-    setIsCancel(false);
-    router.back();
-  };
 
   return (
-    <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md">
+    <div className="container mx-auto w-[75%] bg-[#FFFFFF] p-10 rounded-md shadow-xl shadow-[#C0C0C0]">
       <form
         className="flex flex-col space-y-4 md:space-y-6"
         onSubmit={handleSubmit(onSubmitForm)}
@@ -109,7 +105,7 @@ const ClientForm = () => {
             )}
             {errors.first_name?.type === "pattern" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * Este no es un nombre válido, nombres con mayúsculas
+                * Este no es un nombre válido, nombres con mayúsculas y sin caracteres especiales
               </p>
             )}
           </div>
@@ -126,7 +122,7 @@ const ClientForm = () => {
                 required: true,
                 minLength: 5,
                 maxLength: 50,
-                pattern: /^[A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
+                pattern: /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúñÁÉÍÓÚÑ\s'-]+$/,
               })}
             />
             {errors.last_name?.type === "required" && (
@@ -141,12 +137,12 @@ const ClientForm = () => {
             )}
             {errors.last_name?.type === "maxLength" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * El nombre debe tener 50 caracteres como máximo
+                * El apellido debe tener 50 caracteres como máximo
               </p>
             )}
             {errors.last_name?.type === "pattern" && (
               <p className=" text-red-700 font-light leading-relaxed">
-                * Este no es un nombre válido, nombres con mayúsculas
+                * Este no es un apellido válido, apellidos con mayúsculas y sin caracteres especiales
               </p>
             )}
           </div>
@@ -251,32 +247,6 @@ const ClientForm = () => {
         <div className="flex justify-center mt-2">
           <div className="mb-2 flex-col flex flex-1 mr-3">
             <label className="text-[#302E46] font-semibold text-xl font-jost">
-              Fecha de registro
-            </label>
-            <input
-              className="bg-white text-gray-800 rounded-lg text-center h-10"
-              placeholder="2023-08-13"
-              type="date"
-              {...register("register_date", {
-                required: true,
-                pattern:
-                  /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/,
-              })}
-            />
-            {errors.register_date?.type === "required" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Debes introducir una fecha
-              </p>
-            )}
-            {errors.register_date?.type === "pattern" && (
-              <p className="text-red-700 font-light leading-relaxed">
-                * Esta no es una fecha válida, el formato es yyyy-mm-dd
-              </p>
-            )}
-          </div>
-
-          <div className="mb-2 flex-col flex flex-1 mr-3">
-            <label className="text-[#302E46] font-semibold text-xl font-jost">
               Método de Pago
             </label>
             <select
@@ -308,12 +278,7 @@ const ClientForm = () => {
 
         <div className="flex justify-between">
           <div className="flex flex-1 mx-1">
-            <button
-              className="flex-1 bg-[#1AC317] p-2 text-white rounded-xl hover:bg-[#246623] "
-              onClick={registration}
-            >
-              <h1 className="font-semibold">Registrar</h1>
-            </button>
+            <Button title="Registrar" color="bg-[#3A7E3D]" onClick={registration}/>
           </div>
         </div>
       </form>

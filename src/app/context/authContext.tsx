@@ -22,10 +22,15 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isLogged, setIsLogged] = useState<boolean>(() => {
-    // Retrieve authentication status from localStorage on component initialization
-    return JSON.parse(window.localStorage.getItem('isLogged') || 'false');
-  });
+  const [isLogged, setIsLogged] = useState<boolean>(false); // Inicializado a false
+
+  useEffect(() => {
+    // Este bloque se ejecutará solo en el lado del cliente
+    const storedIsLogged = localStorage.getItem('isLogged');
+    if (storedIsLogged) {
+      setIsLogged(JSON.parse(storedIsLogged));
+    }
+  }, []); // Dependencias vacías para que solo se ejecute una vez
 
   const login = () => {
     setIsLogged(true);
@@ -35,7 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLogged(false);
   };
 
-  // Update localStorage when isLogged changes
+  // Actualizar localStorage cuando cambie isLogged
   useEffect(() => {
     localStorage.setItem('isLogged', JSON.stringify(isLogged));
   }, [isLogged]);
