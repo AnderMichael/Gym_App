@@ -9,6 +9,7 @@ import Table from "@/components/Table";
 import { columnsMachines, rowsMachines } from "@/app/helpers/dataColumns";
 
 const MachinesPage = () => {
+  
   const router = useRouter();
 
   useEffect(() => {
