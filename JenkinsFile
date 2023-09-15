@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'pepitoNode'
+        nodejs 'Nodejs'
     }
     stages {
         stage('Dependencies') {
