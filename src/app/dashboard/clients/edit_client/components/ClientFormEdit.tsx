@@ -18,7 +18,7 @@ const ClientFormEdit = ({ clientData }: ClientFormProps) => {
     useAxios(
       {
         method: "PATCH",
-        url: `http://localhost:3000/clients/${clientData.id}`,
+        url: `${process.env.NEXT_PUBLIC_URL_BACKEND}/clients/${clientData.id}`,
       },
       { manual: true }
     );
